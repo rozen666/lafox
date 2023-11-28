@@ -1,0 +1,61 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install', '-g', 'less' ]
+2 info using npm@1.3.10
+3 info using node@v0.10.25
+4 verbose cache add [ 'less', null ]
+5 verbose cache add name=undefined spec="less" args=["less",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'less',
+6 verbose parsed url   path: 'less',
+6 verbose parsed url   href: 'less' }
+7 silly lockFile 0b439cf4-less less
+8 verbose lock less /root/.npm/0b439cf4-less.lock
+9 silly lockFile 0b439cf4-less less
+10 silly lockFile 0b439cf4-less less
+11 verbose addNamed [ 'less', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile e13833ab-less less@
+14 verbose lock less@ /root/.npm/e13833ab-less.lock
+15 silly addNameRange { name: 'less', range: '*', hasData: false }
+16 verbose url raw less
+17 verbose url resolving [ 'https://registry.npmjs.org/', './less' ]
+18 verbose url resolved https://registry.npmjs.org/less
+19 info trying registry request attempt 1 at 15:47:10
+20 http GET https://registry.npmjs.org/less
+21 info retry will retry, error on last attempt: Error: CERT_UNTRUSTED
+22 info trying registry request attempt 2 at 15:47:20
+23 http GET https://registry.npmjs.org/less
+24 info retry will retry, error on last attempt: Error: CERT_UNTRUSTED
+25 info trying registry request attempt 3 at 15:48:20
+26 http GET https://registry.npmjs.org/less
+27 silly lockFile e13833ab-less less@
+28 silly lockFile e13833ab-less less@
+29 error Error: CERT_UNTRUSTED
+29 error     at SecurePair.<anonymous> (tls.js:1370:32)
+29 error     at SecurePair.EventEmitter.emit (events.js:92:17)
+29 error     at SecurePair.maybeInitFinished (tls.js:982:10)
+29 error     at CleartextStream.read [as _read] (tls.js:469:13)
+29 error     at CleartextStream.Readable.read (_stream_readable.js:320:10)
+29 error     at EncryptedStream.write [as _write] (tls.js:366:25)
+29 error     at doWrite (_stream_writable.js:223:10)
+29 error     at writeOrBuffer (_stream_writable.js:213:5)
+29 error     at EncryptedStream.Writable.write (_stream_writable.js:180:11)
+29 error     at write (_stream_readable.js:583:24)
+30 error If you need help, you may report this log at:
+30 error     <http://github.com/isaacs/npm/issues>
+30 error or email it to:
+30 error     <npm-@googlegroups.com>
+31 error System Linux 2.6.32-19-pve
+32 error command "/usr/bin/nodejs" "/usr/bin/npm" "install" "-g" "less"
+33 error cwd /opt/odoo
+34 error node -v v0.10.25
+35 error npm -v 1.3.10
+36 verbose exit [ 1, true ]
