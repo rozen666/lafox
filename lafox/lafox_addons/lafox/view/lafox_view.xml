@@ -1,0 +1,1539 @@
+<openerp>
+    <data>
+        <!-- VISTA FORM y TREE PARA ALMACEN CENTRAL stock.warehouse-->
+        <record id="view_lafox_almacen_form_inherit" model="ir.ui.view">
+            <field name="name">Almacen.form</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form" position="attributes">
+                        <attribute name="create">false</attribute>
+                        <attribute name="delete">false</attribute>
+                        <attribute name="edit">false</attribute>
+                    </xpath>
+
+                    <xpath expr="/form/sheet/div/button[@name='view_all_routes_for_wh']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/div/button[@name='view_all_routes_for_wh']" position="before">
+                        <button class="oe_stat_button" name="action_open_quants_button" icon="fa-building-o"
+                                type="object" groups="stock.group_locations" string ='Stock General'>
+                   </button>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        
+
+        <record id="view_lafox_almacen_tree_inherit" model="ir.ui.view">
+            <field name="name">Almacen.tree</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//tree" position="attributes">
+                        <attribute name="create">false</attribute>
+                        <attribute name="delete">false</attribute>
+                        <attribute name="edit">false</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+       <!-- ACTION PARA EL ALMCACEN CENTRAL stock.warehouse -->
+       <record model="ir.actions.act_window" id="lafox_almacen_action">
+            <field name="name">Almacen</field>
+            <field name="res_model">stock.warehouse</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help">La Fox</field>            
+        </record>
+        <record model="ir.actions.act_window.view" id="lafox_almacen_action_form">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_almacen_form_inherit"/>
+            <field name="act_window_id" ref="lafox_almacen_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="lafox_almacen_action_tree">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_lafox_almacen_tree_inherit"/>
+            <field name="act_window_id" ref="lafox_almacen_action"/>
+        </record>
+
+        <!-- VISTAS  FORM Y TREE  PARA EL STOCK (stock.quant)  -->
+        <record id="view_stock_actual_form_inherit" model="ir.ui.view">
+            <field name="name">Stockactual.form</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_form"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form/group/field[@name='reservation_id']" position="attributes">
+                           <attribute name="invisible">1</attribute>
+                   </xpath>
+                   <xpath expr="//form/group/field[@name='propagated_from_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                   </xpath>
+                   <xpath expr="//form/group/field[@name='inventory_value']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                   </xpath>
+                   <xpath expr="//form/div/button[@name='action_view_quant_history']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                   </xpath>
+                   <xpath expr="//field[@name='location_id']" position="attributes">
+                        <attribute name="options">{'no_open': True}</attribute>
+                   </xpath>
+                   <xpath expr="//field[@name='product_id']" position="attributes">
+                        <attribute name="options">{'no_open': True}</attribute>
+                   </xpath>
+                   <xpath expr="//field[@name='location_id']" position="after">
+                        <field name="name_responsable"/>
+                   </xpath>
+                </data>
+            </field>
+        </record>
+
+
+        <record id="view_stock_actual_tree_inherit" model="ir.ui.view">
+            <field name="name">Stockactual.tree</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//tree/field[@name='inventory_value']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- VISTAS  FORM Y TREE  PARA LAS UBICACIONES (stock.location)    -->
+        <record id="view_lafox_ubicacion_form_inherit" model="ir.ui.view">
+            <field name="name">Ubicacion.form</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form/group/group[@string='Additional Information']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/group/group[@string='Localization']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/div/button[@name='%(stock.act_product_location_open)d']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/div/button[@name='%(stock.location_open_quants)d']" position="attributes">
+                        <attribute name="context">{'form_view_ref':'lafox.view_stock_actual_form_inherit', 'tree_view_ref':'lafox.view_stock_actual_tree_inherit'}</attribute>
+                        <attribute name="domain">[('location_id.name','!=','VIRTUAL LOCATIONS / VENTAS')]</attribute>
+
+                    </xpath>
+                    <xpath expr="//field[@name='location_id']" position="attributes">
+                        <attribute name="domain">[('id','=',11)]</attribute>
+                        <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+
+        <record id="view_lafox_ubicacion_tree_inherit" model="ir.ui.view">
+            <field name="name">Ubicacion.tree</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_tree2"/>
+            <field name="arch" type="xml">
+                <data>
+                </data>
+            </field>
+        </record>
+
+       <!-- ACTION PARA LAS UBICACIONES stock.location -->
+        <record model="ir.actions.act_window" id="lafox_ubicacion_action">
+            <field name="name">Ubicacion</field>
+            <field name="res_model">stock.location</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('location_id','=', 11),('name','!=','VIRTUAL LOCATIONS / VENTAS')]</field>
+            <field name="help">La Fox</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="lafox_ubicacion_action_form">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_ubicacion_form_inherit"/>
+            <field name="act_window_id" ref="lafox_ubicacion_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="lafox_ubicacion_action_tree">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_lafox_ubicacion_tree_inherit"/>
+            <field name="act_window_id" ref="lafox_ubicacion_action"/>
+        </record>
+
+        <!-- VISTAS  FORM Y TREE  PARA LOS MOVIMIENTOS (stock.move) -->
+        <record id="view_movimientos_form_inherit" model="ir.ui.view">
+            <field name="name">lafox.movimientos.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock_account.view_move_form_inherit"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form/sheet/group/group/field[@name='group_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/group/field[@name='priority']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/field[@name='origin']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/group/group/group/field[@name='invoice_state']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/group/group/group/field[@name='name']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/field[@name='picking_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/field[@name='partner_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//group[@name='quants_grp']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//button[@name='%(stock.move_scrap)d']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group[@name='destination_grp']" position="attributes">
+                        <attribute name='invisible'>False</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/field[@name='location_dest_id']" position="attributes">
+                        <attribute  name="options">{'no_open':true, 'no_quick_create':true, 'no_create_edit':true, 'no_create': True}</attribute>
+                        <attribute  name="domain">[('location_id','=',11),('usage','=','internal')]</attribute>
+                        <attribute name='invisible'>False</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/group/field[@name='product_id']" position="attributes">
+                        <attribute  name="options">{'no_open':true, 'no_quick_create':true, 'no_create_edit':true, 'no_create': True}</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/field[@name='location_id']" position="attributes">
+                        <attribute  name="options">{'no_open':true, 'no_quick_create':true, 'no_create_edit':true, 'no_create': True}</attribute>
+                        <attribute  name="domain">[('location_id','=',11),('usage','=','internal')]</attribute>
+                        <attribute name='invisible'>False</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/group/div/field[@name='product_uom_qty']" position="attributes">
+                        <attribute name="options">{'no_open':true, 'no_quick_create':true, 'no_create_edit':true, 'no_create': True}</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/group/div/field[@name='product_uom']" position="before">
+                        <field name="total_movimiento" readonly="True" />
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/group/field[@name='picking_type_id']" position="attributes">
+                        <attribute  name="options">{'no_open':true, 'no_quick_create':true, 'no_create_edit':true, 'no_create': True}</attribute>
+                        <attribute  name="attrs">{'readonly': [('state', '=', 'done')]}</attribute>
+                    </xpath>
+                    <xpath expr="//form/header/button[@name='action_done']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/header/button[@name='action_confirm']" position="before">
+                        <button name="button_approve_move2" string='Procesar Movimiento' class="oe_highlight" type="object" attrs="{'invisible': [('state', '!=', 'draft')]}" />
+                    </xpath>
+                    <xpath expr="//form/header/button[@name='action_confirm']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/group/div/field[@name='product_uom']" position="attributes">
+                        <attribute name="invisible">False</attribute>
+                        <attribute name="groups">base.group_no_one</attribute>
+                        <attribute name="modifiers">{}</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="view_movimientos_tree_inherit" model="ir.ui.view">
+            <field name="name">lafox.movimientos.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/tree" position="attributes">
+                      <attribute name="colors">red:state == 'cancel'; #FF9900:state == 'confirmed'; green:state=='assigned'; blue:state=='draft'</attribute>
+                    </xpath>
+                    <xpath expr="/tree" position="attributes">
+                        <attribute name="delete">false</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='product_uom_qty']" position="after">
+                        <field name="total_movimiento" string="Total del movimiento"/>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='picking_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='origin']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//tree/button[@name='action_done']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//tree/button[@string='Scrap Products']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- ACTION PARA LOS MOVIMIENTOS stock.location -->
+        <record model="ir.actions.act_window" id="lafox_movimientos_action">
+            <field name="name">Movimientos</field>
+            <field name="res_model">stock.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="domain">[('picking_type_id','!=',False)]</field>
+            <field name="help">La Fox</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="lafox_movimientos_action_form">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_movimientos_form_inherit"/>
+            <field name="act_window_id" ref="lafox_movimientos_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="lafox_movimientos_action_tree">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_movimientos_tree_inherit"/>
+            <field name="act_window_id" ref="lafox_movimientos_action"/>
+        </record>
+
+                <!-- VISTAS  FORM Y TREE  PARA CONFIRMACION DE MOVIMIENTOS (stock.move) -->
+        <record id="view_movimientos_form_inherit_confimr" model="ir.ui.view">
+            <field name="name">lafox.movimientos.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="view_movimientos_form_inherit"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form/header/button[@name='action_done']" position="attributes">
+                        <attribute name="invisible">False</attribute>
+                    </xpath>
+                    <xpath expr="//form/header/button[@name='button_approve_move2']" position="attributes">
+                        <attribute name="invisible">False</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+
+        <record id="view_movimientos_tree_inherit_confirm" model="ir.ui.view">
+            <field name="name">lafox.movimientos.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/tree" position="attributes">
+                        <attribute name="delete">false</attribute>
+                    </xpath>
+                    <xpath expr="/tree" position="attributes">
+                        <attribute name="create">false</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='date_expected']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='picking_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='origin']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//tree/button[@name='action_done']" position="attributes">
+                        <attribute name="invisible">0</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- ACTION PARA LOS MOVIMIENTOS stock.location -->
+        <record model="ir.actions.act_window" id="lafox_movimientos_action_confirm">
+            <field name="name">Movimientos</field>
+            <field name="res_model">stock.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="domain">['|','|',('location_id.complete_name','=','Virtual Locations / Procurements'), ('location_dest_id.complete_name', '=', 'Virtual Locations / Procurements'),('location_dest_id.complete_name', '=', 'Physical Locations / WH / VIRTUAL LOCATIONS / DEVOLUCIONES-FABRICA')]</field>
+            <field name="help">La Fox</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="lafox_movimientos_action_form_confirm">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_movimientos_form_inherit_confimr"/>
+            <field name="act_window_id" ref="lafox_movimientos_action_confirm"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="lafox_movimientos_action_tree_confirm">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_movimientos_tree_inherit_confirm"/>
+            <field name="act_window_id" ref="lafox_movimientos_action_confirm"/>
+        </record>
+
+
+        <!-- Vista Form para la creacion de un nuevo Producto -->
+        <record id="view_lafox_new_product_form" model="ir.ui.view">
+            <field name="name">Nuevo Producto</field>
+            <field name="model">lafox.new.product</field>
+            <field name="arch" type="xml">
+                <form string="Crear nuevo producto">
+                    <separator string="Nuevo producto"/>
+                    <group col ='4'>
+                        <field name= 'ubicacion' domain="[('location_id','=',11),('usage','=','internal')]"/>
+                        <field name= 'name'/>
+                        <field name='new_clave'/>
+                        <field name= 'piezas_tot'/>
+                        <field name= 'pz_a_usar'/>
+                    </group>
+                    <footer>
+                        <button name= "button_new_product" string="Nuevo Producto" class="oe_highlight" type="object" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_lafox_new_product_action" model="ir.actions.act_window">
+            <field name="name">Crear nuevo producto</field>
+            <field name="res_model">lafox.new.product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_new_product_form"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+            <field name="help">La Fox</field>
+        </record>
+
+
+        <!-- PRODUCT.PRODUCT VISTA SEARCH-->
+        <record id="view_search_product_product" model="ir.ui.view">
+              <field name="name">Product Search</field>
+              <field name="model">product.product</field>
+              <field name="arch" type="xml">
+                <search string="Búsqueda de Productos">
+                    <field name="name" string='Clave del Producto' />
+                    <field name="clave_prod"/>
+                    <field name="list_price" />
+                    <!--<field name="ean13" />-->
+                    <field name="cod_crudos" />
+                    <field name="grupo_precios_id" />
+                    <field name="grupo_inventarios_id" />
+                    <field name="poveedor_prod" />
+                    <field name="state_product" />
+                </search>
+             </field>
+            </record>
+
+        <!-- PRODUCT.PRODUCT VISTA TREE-->
+        <record id="view_product_tree_lafox" model="ir.ui.view">
+            <field name="name">view.product.tree.lafox</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- <xpath expr="/tree" position="attributes">
+                      <attribute name="colors">red:state_product =='MUY_MALO'; #FF9900:state_product=='MALO'; purple:state_product=='REGULAR';blue:state_product='BUENO';green:state_product=='EXCELENTE'</attribute>
+                    </xpath> -->
+                    <xpath expr="/tree" position="attributes">
+                      <attribute name="colors">blue:state_product == 'BUENO';green:state_product == 'EXTRAORDINARIO';purple:state_product == 'REGULAR';red:state_product == 'MALO';</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='categ_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='type']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='state']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='name']" position="after">
+                        <field name="clave_prod" string='Nombre del producto' placeholder='Descripcion del producto'/>
+                        <field name="clave_prod_especiales" string='Ágrupación del producto'/>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='name']" position="attributes">
+                        <attribute name="string">clave del producto</attribute>
+                        <attribute name="placeholder">clave del producto</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='categ_id']" position="after">
+                        <field name="list_price"/>
+                        <field name="c_t"/>
+                        <field name="promedio_mensual"/>
+                        <field name="porcentaje_vendido" widget="progressbar"/>
+                        <field name="mes_venta"/>
+                        <field name="state_product" invisible='True'/>
+                        <field name="producto_vendidos" readonly='True' string='Cantidad Vendida'/>
+                        <field name="cantidad_vende" invisible='True'/>
+                        <field name="producto_move" readonly='True' string ='Cantidad Abastecimiento'/>
+                        <field name="cod_crudos" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- PRODUCT.PRODUCT VISTA FORM-->
+        <record id="view_product_form_lafox" model="ir.ui.view">
+            <field name="name">view.product.form.lafox</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form/sheet" position='before'>
+                        <header>
+                            <button name="%(view_lafox_new_product_action)d" string= "Crear nuevo Producto" type="action"  class="oe_highlight" />
+                            <field name='state_product' widget='statusbar' clickable='True' readonly='False'/>
+                        </header>
+                    </xpath>
+                    <xpath expr="//field[@name='list_price']" position="after">
+                      <field name="cantidad_minima" string="Cant. Min."/>
+                    </xpath>
+                    <xpath expr="//field[@name='list_price']" position="after">
+                        <field name="precio_especial" />
+                        <field name="piezas_x_paquete" string="Piezas por paquete" />
+                    </xpath>
+                    <xpath expr="//field[@name='default_code']" position="replace">
+                        <field name="cod_crudos" />
+                        <field name="promedio_mensual" readonly='True' />
+                    </xpath>
+                    <xpath expr="//field[@name='ean13']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='active']" position="replace">
+                        <field name="blo_si_no"/>
+                    </xpath>
+                    <xpath expr="//field[@name='name']" position="attributes">
+                        <attribute name="string">clave del producto</attribute>
+                        <attribute name="placeholder">clave del producto</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='name']" position="after">
+                        <field name="clave_prod" placeholder="NOMBRE DEL PRODUCTO"/>
+                        <field name="clave_prod_especiales" placeholder="AGRUPACIÓN DEL PRODUCTO"/>
+
+                        <button class="oe_stat_button"
+                           name="action_open_quants"
+                           icon="fa-building-o"
+                           type="object" groups="stock.group_locations"
+                           string="Cant. Almacen">
+                        </button>
+
+                    </xpath>
+
+                    <xpath expr="//field[@name='sale_ok']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//label[@for='sale_ok']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='type']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[2]" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[3]" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[4]" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[5]" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[6]" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='description']" position="attributes">
+                      <attribute name="placeholder">DESCRIPCIÓN DEL PRODUCTO</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='description']" position="before">
+                        <group col ='4' colspan='2'>
+                          <field name="grupo_precios_id"/>
+                          <field name="ref_prod"/>
+                          <field name="grupo_inventarios_id"/>
+                          <field name="c_t"/>
+                          <field name="especial_product"/>
+                          <field name="moneda_prod"/>
+                          <field name="iva_prod"/>
+                          <field name="poveedor_prod"/>
+                          <field name="revisar_ventas"/>
+                          <field name="observacion_prod"/>
+                          <field name="unidad_product" />
+                      </group>
+                      <group col ='4' colspan='2'>
+                            <field name="porcentaje_vendido" readonly='False' widget="progressbar"/>
+                            <field name="mes_venta" readonly='False'/>
+                            <field name="cantidad_vende" string='Cantidades de Venta' invisible='True'/>
+                            <field name="cantidad_vendidos" string='Cantidad de Venta Mensual'/>
+                            <field name="producto_vendidos"  readonly='True' string='Cantidad Vendida'/>
+                            <field name="producto_move" readonly='True' string ='Cantidad Abastecimiento'/>
+                      </group>
+                    </xpath>
+                    <xpath expr="//field[@name='description']" position="after">
+                      <field name='seguimiento_id' readonly='True' attrs="{'invisible': [('revisar_ventas', '!=', True)]}">
+                        <tree>
+                            <field name='fecha_venta' />
+                            <field name='cantidad' />
+                            <field name='costo' />
+                            <field name='cliente_venta' />
+                            <field name='venta_realizada' />
+                            <field name='id_invoice_line' invisible='True'/>
+                        </tree>
+                    </field>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="lafox_movimientos_action_productos">
+            <field name="name">Productos</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="domain">[('id','>',1)]</field>
+            <field name="context">{}</field>
+            <field name="context">{'in_context':True}</field>
+            <field name="search_view_id" ref="view_search_product_product"/>
+            <field name="help">La Fox</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="lafox_action_productos_form">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_product_form_lafox"/>
+            <field name="act_window_id" ref="lafox_movimientos_action_productos"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="lafox_action_productos_tree">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_product_tree_lafox"/>
+            <field name="act_window_id" ref="lafox_movimientos_action_productos"/>
+        </record>
+
+        <!-- res_partner VISTA SEARCH -->
+        <record id="view_search_partner" model="ir.ui.view">
+              <field name="name">Partner Search</field>
+              <field name="model">res.partner</field>
+              <field name="mode">primary</field>
+              <field name="arch" type="xml">
+                <search string="Búsqueda de Clientes">
+                    <field name="clave_cliente" />
+                    <field name="name" string='Nombre de cliente' />
+                    <field name="medio_contacto" />
+                    <field name="vendedor" />
+                    <field name="referencia" />
+                    <field name="rfc_cliente" />
+                    <field name="metodo_pago" />
+                    <field name="dias_credito" />
+                    <field name="escala_precios" options="{'no_create': True}" />
+                    <field name="escala_precios_esp" options="{'no_create': True}" />
+                    <field name="promedio_compra_mensual" readonly='True' />
+                    <field name="mayor_compra_mensual" />
+                    <field name="ultima_compra_mensual" />
+                    <field name="puntualidad_de_pago" />
+                    <field name="state_cliente" />
+                </search>
+             </field>
+            </record>
+
+        <!-- res_partner VISTA TREE-->
+        <record id="view_cliente_tree_lafox" model="ir.ui.view">
+            <field name="name">view.cliente.tree.lafox</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                  <xpath expr="//tree/field[@name='display_name']" position="before">
+                    <field name="clave_cliente" />
+                  </xpath>
+                  <xpath expr="//tree/field[@name='email']" position="after">
+                    <field name="puntualidad_de_pago" />
+                    <field name="state_cliente" />
+                  </xpath>
+                  <xpath expr="/tree" position="attributes">
+                      <attribute name="colors">
+                        green:puntualidad_de_pago=='EXTRAORDINARIO';
+                        blue:puntualidad_de_pago=='BUENO';
+                        CCCC00:puntualidad_de_pago=='REGULAR';
+                        red:puntualidad_de_pago=='MALO'
+                      </attribute>
+                    </xpath>
+                    <xpath expr="/tree" position="attributes">
+                      <attribute name="colors">
+                        green:state_cliente=='EXTRAORDINARIO';
+                        blue:state_cliente=='BUENO';
+                        CCCC00:state_cliente=='REGULAR';
+                        red:state_cliente=='MALO'
+                      </attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- res_partner VISTA FORM-->
+        <record id="view_cliente_form_lafox" model="ir.ui.view">
+            <field name="name">view.cliente.form.lafox</field>
+            <field name="model">res.partner</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                  <xpath expr="//form/sheet" position='before'>
+                    <header>
+                        <field name='state_cliente' widget='statusbar' clickable='True' readonly='False'/>
+                    </header>
+                  </xpath>
+                  <xpath expr="//field[@name='street2']" position="replace">
+                    <field name="street2" placeholder="Municipio / Localidad..."/>
+                  </xpath>
+                  <xpath expr="//field[@name='fax']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <!-- <attribute name="string">WhatsApp</attribute> -->
+                  </xpath>
+                  <xpath expr="//label[@for='name']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                      <attribute name="search">name_search</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/div[@name='buttons']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                  <xpath expr="/form/sheet/div/div" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='parent_id']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='category_id']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/group/group[1]/field[@name='website']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/group/group[2]/field[@name='function']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/group/group[2]/field[@name='title']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/group/group[2]/field[@name='phone']" position="before">
+                    <field name="lada_cliente" invisible='True'/>
+                  </xpath>
+                  <xpath expr="/form/sheet/notebook" position="before">
+                    <group col ='4' colspan='2'>
+                      <field name="medio_contacto"/>
+                      <field name="vendedor"/>
+                      <field name="referencia"/>
+                      <field name="observaciones"/>
+                  </group>
+                  </xpath>
+                  <xpath expr="//field[@name='name']" position="after">
+                    <field name="clave_cliente" placeholder="CLAVE"/>
+                    <button name="validate_rfc" string="Verificar validez RFC" type="object" icon="gtk-execute" class="oe_inline" style="width: 50%"/>
+
+                  </xpath>
+                  <xpath expr="/form/sheet/notebook/page[1]" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/notebook/page[2]" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/notebook/page[3]" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='street']" position="attributes">
+                    <attribute name="placeholder">Calle y Colonia...</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='street']" position="after">
+                    <div class="address_format">
+                        <field name="num_interior" placeholder="Numero interior..." style="width: 50%" invisible= 'True'/>
+                        <field name="num_exterior" placeholder="Numero exterior..." style="width: 50%" invisible= 'True'/>
+                    </div>
+                  </xpath>
+
+                <xpath expr="//field[@name='city']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='city_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <!-- <xpath expr="/form/sheet/notebook/page[4]" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath> -->
+                  <xpath expr="/form/sheet/notebook" position="before">
+                    <separator string="Valores Del Cliente"/>
+                    <group name="Valores_de_cliente" col ='4' colspan='2'>
+                      <field name="rfc_cliente"/>
+                      <field name="metodo_pago"/>
+                      <field name="fisica_moral"/>
+                      <field name="moneda_valores"/>
+                      <field name="limite_credito"/>
+                      <field name="dias_credito"/>
+                      <field name="escala_precios" options="{'no_create': True}" />
+                    <field name="escala_precios_esp" options="{'no_create': True, 'no_open': True}" >
+                        <tree editable='Bottom' >
+                            <field name='name' required='1'/>
+                            <field name='factor' required='1'/>
+                        </tree>
+                    </field>
+                      
+                      <field name="producto_pref" />
+                  </group>
+                  </xpath>
+                  <xpath expr="/form/sheet/notebook" position="before">
+                    <separator string="Informativo Del Cliente"/>
+                    <group col ='4' colspan='2'>
+                      <field name="metodo_pago_readonly"/>
+                      <field name="saldo_pendiente"/>
+                      <field name="promedio_compra_mensual" readonly= 'True'/>
+                      <field name="mayor_compra_mensual"/>
+                      <field name="ultima_compra_mensual"/>
+                      <field name="puntualidad_de_pago"/>
+                  </group>
+                  </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="lafox_movimientos_action_cliente">
+            <field name="name">Cliente</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form,tree</field>
+            <field name="domain">[('customer','=',True)]</field>
+            <field name="domain">[('supplier','=',False)]</field>
+            <field name="search_view_id" ref="view_search_partner"/>
+            <field name="help">La Fox</field>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="lafox_action_cliente_form">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_cliente_form_lafox"/>
+            <field name="act_window_id" ref="lafox_movimientos_action_cliente"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="lafox_action_cliente_tree">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_cliente_tree_lafox"/>
+            <field name="act_window_id" ref="lafox_movimientos_action_cliente"/>
+        </record>
+
+        <!-- VISTA ASIGNACON DE INVENTARIO LAFOX_PRODUCTO_INVENTARIO FORM -->
+        <record id="view_lafox_asignacion_inventario_form" model="ir.ui.view">
+            <field name="name">view.lafox.asignacion.inventario.form</field>
+            <field name="model">lafox.inventario.producto</field>
+            <field name="arch" type="xml">
+                <form string="Formulario para Asignacion de Inventario">
+                    <group>
+                        <field name="tipo_producto" context="{'tipo_producto':tipo_producto}" on_change='_onchange_domain_producto(tipo_producto,context)' />
+                        <field name="supplier_id" domain="[('supplier','!=', False)]" options="{'no_create': True}" />
+                        <field name="referencia"/>
+
+                    </group>
+                    <group attrs="{'invisible': [('tipo_producto', '=', False)]}">
+                        <field name="product_id" required ='True' string='Productos' context="{'tipo_producto':tipo_producto}" on_change='_onchange_domain_producto(tipo_producto,context)'>
+                            <tree editable='Bottom' >
+                                <field name="producto" required = 'True' on_change='_onchange_domain_producto(producto,context)' context="{'form_view_ref':'lafox.view_product_form_lafox', 'tree_view_ref':'lafox.view_product_tree_lafox', 'tipo_producto':tipo_producto}"/>
+                                <field name="descripcion" required = 'True'/>
+                                <field name="piezas" required = 'True'/>
+                                <field name="cantidad" required = 'True'/>
+                                <field name="responsable" readonly = 'True'/>
+                            </tree>
+                        </field>
+
+                    </group>
+                    <footer>
+                        <button name="button_asignar_inventario" string="Asignar Inventario" class="oe_highlight" icon="gtk-execute" type="object"  confirm="Los cambios quedaran guardados despues de confirmar Y no podra revertir dichos movimientos" attrs="{'invisible': [('tipo_producto', '=', False)]}"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_lafox_asignacion_inventario_action" model="ir.actions.act_window">
+          <field name="name">Asignación de Inventario</field>
+          <field name="res_model">lafox.inventario.producto</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="view_lafox_asignacion_inventario_form"/>
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+          <field name="target">new</field>
+          <field name="help">La Fox</field>
+      </record>
+
+
+       <!-- ACTION PARA STOCK_QUANT -->
+            <record id="stock.product_open_quants" model="ir.actions.act_window">
+                <field name="domain">[('location_id.name','!=','VIRTUAL LOCATIONS / VENTAS'),('location_id.name','!=','VIRTUAL LOCATIONS / DEVOLUCIONES'),('location_id.name','!=','VIRTUAL LOCATIONS / DEVOLUCIONES-FABRICA')]</field>
+            </record>
+
+
+
+        <!-- res_partner proveedores VISTA TREE-->
+         <record id="view_proveedor_tree_lafox" model="ir.ui.view">
+            <field name="name">view.proveedor.tree.lafox</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="view_cliente_tree_lafox"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/tree" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        
+<!-- res_partner proveedores VISTA FORM-->
+        <record id="view_proveedor_form_lafox" model="ir.ui.view">
+            <field name="name">view.proveedor.form.lafox</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                  <xpath expr="//field[@name='street2']" position="replace">
+                    <field name="street2" placeholder="Colonia..."/>
+                  </xpath>
+                  <xpath expr="//field[@name='fax']" position="attributes">
+                    <attribute name="string">WhatsApp</attribute>
+                  </xpath>
+                  <xpath expr="//label[@for='name']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/div[@name='buttons']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                  <xpath expr="/form/sheet/div/div" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='parent_id']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='category_id']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/group/group[1]/field[@name='website']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/group/group[2]/field[@name='function']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/group/group[2]/field[@name='title']" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/group/group[2]/field[@name='phone']" position="attributes">
+                    <field name="lada_cliente" invisible='True'/>
+                    <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="//field[@name='name']" position="attributes">
+                  </xpath>
+                  <xpath expr="/form/sheet/notebook" position="attributes">
+                  <attribute name="invisible">1</attribute>
+                  </xpath>
+                  <xpath expr="/form/sheet/notebook" position="before">
+                    <separator string="Valores Del Cliente"/>
+                  <group>
+                      <field name="rfc_cliente"/>
+                      <field name="fisica_moral"/>
+                      <field name="proveedor1" />
+                  </group>
+                  </xpath>
+                  <xpath expr="//field[@name='name']" position="after">
+                    <field name="clave_cliente" placeholder="CLAVE"/>
+                    <button name="validate_rfc" string="Verificar validez RFC" type="object" icon="gtk-execute" class="oe_inline" style="width: 50%"/>
+                  </xpath>
+                </data>
+            </field>
+        </record>
+
+                <!-- ACTION PARA lafox.proveedor -->
+        <record id="action_lafox_proveedor" model="ir.actions.act_window">
+            <field name="name">Proveedores</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="view_proveedor_tree_lafox" />
+            <field name="domain">[('supplier','!=', False)]</field>
+            <field name="context">{'search_default_view_proveedor_tree_lafox': True}</field>
+            <field name="context">{'in_context':True}</field>
+            <field name="help">La Fox</field>
+        </record>
+
+
+
+        <record model="ir.actions.act_window.view" id="action_lafox_proveedor_form">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_proveedor_form_lafox"/>
+            <field name="act_window_id" ref="action_lafox_proveedor"/>
+        </record>
+
+
+        <record model="ir.actions.act_window.view" id="action_lafox_proveedor_tree">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_proveedor_tree_lafox"/>
+            <field name="act_window_id" ref="action_lafox_proveedor"/>
+        </record>
+
+
+
+
+        <!--Vista TREE para fabricacion de producto-->
+
+        <record id="view_lafox_fabrica_producto_tree" model="ir.ui.view">
+            <field name="name">view.lafox.fabrica.producto.tree</field>
+            <field name="model">lafox.fabrica.producto</field>
+            <field name="arch" type="xml">
+                <tree string="Informacion de materia prima utilizada" colors="blue:state_pedido=='BORRADOR';yellow:state_pedido=='EN PROCESO';red:state_pedido=='CANCELADO';green:state_pedido=='APROVADO' ">
+                    <!-- <field name="folio"/> -->
+                    <field name="state_pedido"/>
+                    <field name="name_producto"/>
+                    <field name="clave_produc" />
+                    <field name="costo_total_dlss" groups="base.group_no_one, lafox.group_lafox_admr" />
+                </tree>
+            </field>
+        </record>
+
+
+        <!--Vista FORM para fabricacion de producto-->
+        <record id= "view_lafox_fabrica_producto_form" model="ir.ui.view">
+            <field name="name"> view.lafox.fabrica.producto.form</field>
+            <field name="model">lafox.fabrica.producto</field>
+            <field name="arch" type="xml">
+                <form string="Materia prima utilizada">
+                    <header>
+
+                        <button string="Solicitar aprobacion" type="object" name="button_solicitar_pedido" attrs="{'invisible': [('state_pedido', '!=', 'BORRADOR')]}" />
+                        <button string="Aprovar" type="object" name="button_aprovar_pedido" attrs="{'invisible': [('state_pedido', '!=', 'EN PROCESO')]}" groups="base.group_no_one, lafox.group_lafox_admr" />
+                        <button string="Cancelar" type="object" name="button_cancelar_pedido" class="oe_highlight" attrs="{'invisible': [('state_pedido', '!=', 'EN PROCESO')]}" groups="base.group_no_one, lafox.group_lafox_admr" />
+                        <field name='state_pedido' widget='statusbar' readonly='False' clickable='True' />
+                    </header>
+
+                    <field name="imagen_producto" widget="image" class="oe_left oe_avatar" options="{'preview_image': 'image_medium', 'size': [90,90]}" modifiers="{}" />
+                    <group>
+                        <group>
+                            <!-- <field name="clave_produc" placeholder="MODELO CLAVE" /> -->
+                            <field name="name_producto" string="Nombre" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')], 'invisible': [('state_pedido', '==', 'BORRADOR')], 'groups': [('state_pedido', '==', 'APROVADO')]}"  />
+                            <field name="folio" string="Modelo" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')], 'invisible': [('state_pedido', '==', 'BORRADOR')], 'groups': [('state_pedido', '==', 'APROVADO')]}" />
+                            <field name="num_porciones" string="Numero de porciones" readonly="True" />
+                            <field name="fecha_material" string="Fecha" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}" />
+                            <field name="seguimiento_product" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}">
+                                <tree editable="Bottom">
+                                <field name="pro"/>
+                                <!-- <field name="accesorios" /> -->
+                                <field name="descrip_pro" />
+                                <field name="cantidad"/>
+                                <field name="cantidad_paquete"/>
+                                <field name="equivalencia" />
+                                <field name="unidad2" />
+                                <field name="costo_unidad" groups="base.group_no_one, lafox.group_lafox_admr" />
+                                <field name="pvf" groups="base.group_no_one, lafox.group_lafox_admr"/>
+                                <field name="costo2" groups="base.group_no_one, lafox.group_lafox_admr" />
+                                <field name="sobrante_pro" string="Sobrante" groups="base.group_no_one, lafox.group_lafox_admr"/>
+                                </tree>
+                            </field>
+                            <group col ='4' colspan='2'>
+                                <field name="mano_obra" string="Mano de obra MXN" invisible="False" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}"/>
+                                <field name="cambio" string="Mano de obra USD" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}" />
+                                <field name="tipo_cambio" string="Tipo de Cambio" groups="base.group_no_one, lafox.group_lafox_admr" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}" />
+                                <field name="factor" string="Factor" groups="base.group_no_one, lafox.group_lafox_admr" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}" />
+                                <field name="costo_total" string=" Costo Total" groups="base.group_no_one, lafox.group_lafox_admr" invisible="True" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}" />
+                                <field name="costo_total_dlss" string="Precio final" groups="base.group_no_one, lafox.group_lafox_admr" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}" />
+                                <field name="comentarios" placeholder="COMENTARIOS" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}" />
+                                <field name="soli_autorizacion" string="Solicitar autorizacion" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}" />
+                                <field name="autorizar" string="Autorizar solicitud" attrs="{'readonly': [('state_pedido', '==', 'CANCELADO')]}" groups="base.group_no_one, lafox.group_lafox_admr" />
+                            </group>
+                        </group>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+         <!--ACTION PARA fabricacion de producto-->
+         <record model="ir.actions.act_window" id="action_lafox_fabrica_producto">
+            <field name="name">Fabricacion de productos</field>
+            <field name="res_model">lafox.fabrica.producto</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_lafox_fabrica_producto_tree" />
+            <field name="domain">[]</field>
+            <field name="help">La Fox</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="form_fabrica">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_fabrica_producto_form" />
+            <field name="act_window_id" ref="action_lafox_fabrica_producto" />
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_lafox_fabrica_producto_tree">
+            <field eval="1" name="sequence" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_lafox_fabrica_producto_tree" />
+            <field name="act_window_id" ref="action_lafox_fabrica_producto" />
+        </record>
+
+
+        <!-- VISTA TREE PARA less product -->
+        <record id="view_lafox_less_product_tree" model="ir.ui.view">
+            <field name="name">view.lafox.less.product_tree</field>
+            <field name="model">lafox.less.product</field>
+            <field name="arch" type="xml">
+                <tree string="Reduccion de material crudo">
+                    <field name="name_less_product" />
+                    <field name="cantidad_less" />
+                    <field name="costo_total_less" />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- VISTA FORM PARA less product -->
+        <record id="view_lafox_less_product_form" model="ir.ui.view">
+            <field name="name">view.lafox.less.product.form</field>
+            <field name="model">lafox.less.product</field>
+            <field name="arch" type="xml">
+                <form string="Reduccion de material crudo">
+                    <header>Costo de material</header>
+                    <sheet>
+                        <field name="imagen_less_product" widget="image" class="oe_left oe_avatar" options="{'preview_image': 'image_medium', 'size': [90,90]}" modifiers="{}" />
+                        <group>
+                            <field name="name_less_product" style="width:60%" options="{'no_create': True, 'no_open': True}" />
+                            <field name="cantidad_less" style="width:60%" />
+                            <field name="almacen_origen" style="width:60%" />
+                            <field name="almacen_destino" style="width:60%" />
+                            <field name="lafox_less_product" string="Informacion" style="width:30%" >
+                                <tree editable="Bottom">
+                                    <field name="pro"/>
+                                    <!-- <field name="accesorios" /> -->
+                                    <field name="descrip_pro" />
+                                    <field name="cantidad"/>
+                                    <field name="cantidad_paquete"/>
+                                    <field name="equivalencia" />
+                                    <field name="unidad2" />
+                                    <field name="sobrante_pro" groups="base.group_no_one, lafox.group_lafox_admr"/>
+                                    <field name="costo_unidad" groups="base.group_no_one, lafox.group_lafox_admr"/>
+                                    <field name="pvf" groups="base.group_no_one, lafox.group_lafox_admr"/>
+                                    <field name="costo2" groups="base.group_no_one, lafox.group_lafox_admr"/>
+                                </tree>
+                            </field>
+                            <field name="costo_total_less" groups="base.group_no_one, lafox.group_lafox_admr" />
+                        </group>
+                        <button string="Aplicar cambios" type="object" name="boton_less" class="oe_highlight" />
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- ACTION PARA less product -->
+        <record model="ir.actions.act_window" id="action_lafox_less_product">
+            <field name="name">Reduccion de material crudo</field>
+            <field name="res_model">lafox.less.product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_less_product_form" />
+            <field name="target">new</field>
+            <field name="help">La Fox</field>
+        </record>
+
+
+        <record model="ir.actions.act_window.view" id="action_lafox_less_product_form">
+            <field eval="1" name="sequence" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_less_product_form" />
+            <field name="act_window_id" ref="action_lafox_less_product" />
+        </record>
+
+
+    <!-- VISTA TREE PARA lafox cotizacion -->
+        <record id="view_lafox_cotizacion_tree" model="ir.ui.view">
+            <field name="name">view.lafox.cotizacion.tree</field>
+            <field name="model">lafox.cotizacion</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <tree string="Cotizacion">
+                    <field name="modelo" />
+                    <field name="costo_coti" />
+                    <field name="descripcion_coti" />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- VISTA FORM PARA lafox cotizacion -->
+
+        <record id="view_lafox_cotizacion_form" model="ir.ui.view">
+            <field name="name">view.lafox.cotizacion.form</field>
+            <field name="model">lafox.cotizacion</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <form string="Cotizacion Lafox">
+                    <header>Cotizacion Lafox</header>
+                    <sheet>
+                        <group>
+                            <field name="modelo" string="Modelo" />
+                            <field name="descripcion_coti" string="Descripcion" />
+                            <field name="referencia_coti" string="Referencia" />
+                            <field name="piezas_pa" string="Piezas por paquete" />
+                            <field name="costo_coti" string="Costo" />
+                            <field name="pvf_coti" string="PVF" />
+                            <field name="unidad" string="Unidad" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- ACTION PARA lafox cotizacion -->
+
+        <record  id="lafox_cotizacion_action" model="ir.actions.act_window">
+            <field name="name">Cotizacion Lafox</field>
+            <field name="res_model">lafox.cotizacion</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_lafox_cotizacion_tree" />
+            <field name="help">La fox</field>
+        </record>
+
+
+        <record model="ir.actions.act_window.view" id="action_lafox_cotizacion_form">
+            <field eval="2" name="sequence" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_cotizacion_form" />
+            <field name="act_window_id" ref="lafox_cotizacion_action" />
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_lafox_cotizacion_tree">
+            <field eval="1" name="sequence" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_lafox_cotizacion_tree" />
+            <field name="act_window_id" ref="lafox_cotizacion_action" />
+        </record>
+
+        <!-- INICIO ENTRADA INVENTARIO -->
+
+        <record model="ir.ui.view" id="lafox_entrada_inventario_view_form">
+            <field name="name">Movimientos Form</field>
+            <field name="model">lafox.movimiento.de.grupo</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" readonly='True' widget='statusbar'/>
+                    </header>
+                <sheet>
+                        <h2><field name="nomenclatura" readonly='True'/></h2>
+
+                    <group>
+                        <group>
+                            <div>
+                                <separator string="Ubicación de origen"/>
+                                <field name="location_id" readonly='True' options="{'no_open': True}"/>
+                            </div>
+                        </group>
+                        <group>
+                            <div>
+                                <separator string="Ubicación Destino"/>
+                                <field name="location_dest_id" readonly='True' options="{'no_open': True}"/>
+                            </div>
+                        </group>
+                        <field name="fecha" />
+                        <field name="referencia" />
+                        <field name="supplier_id" domain="[('supplier','!=', False)]"/>
+                        <field name="picking_type_id" readonly='True' options="{'no_open': True}"/>
+
+                        <!-- <field name="modelo" string="Modelo" /> -->
+                    </group>
+                    <!-- <field name="product_ids" on_change='1' attrs="{'readonly': [('state', '!=', 'draft')]}"> -->
+                    <field name="product_ids" on_change='1'>
+                        <tree editable='Bottom'>
+                            <field name='product_id' context="{'in_abastecimiento':'True', 'form_view_ref':'lafox.view_product_form_lafox'}" on_change='_change_product_id(product_id,product_qty,product_uom_qty,context)' domain="[('blo_si_no','!=', True)]"/>
+                            <field name='product_qty' context="{'in_abastecimiento':'True'}"  on_change='_change_product_id(product_id,product_qty,product_uom_qty,context)'/>
+                            <field name='product_uom_qty' context="{'in_abastecimiento':'True'}"  on_change='_change_product_id(product_id,product_qty,product_uom_qty,context)'/>
+                            <field name='product_uom'/>
+                            <field name='descripcion_product'/>
+                            <field name='description' invisible='True'/>
+                            <field name='precio_mov' invisible='True'/>
+                        </tree>
+                    </field>
+                        <div>
+                            <field name='total_movimiento' readonly='True' />
+                        </div>
+                        <footer>
+                        <button name="button_approve_move2" string="Procesar" class="oe_highlight" type="object" size='100%' attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    </footer>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_lafox_entrada_inventario">
+            <field name="name">Movimientos</field>
+            <field name="res_model">lafox.movimiento.de.grupo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="domain">[]</field>
+            <field name="context">{'in_abastecimiento':'True'}</field>
+            <field name="help">La Fox</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="lafox_entrada_inventario_view_form" />
+        </record>
+
+        <!-- FIN ENTRADA INVENTARIO -->
+    
+
+        <record model="ir.ui.view" id="lafox_movimientos_view_form">
+            <field name="name">Movimientos Form</field>
+            <field name="model">lafox.movimiento.de.grupo</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" readonly='True' widget='statusbar'/>
+                    </header>
+                <sheet>
+                    <h2><field name="nomenclatura" readonly='True'/></h2>
+                    <group>
+                        <group>
+                            <div>
+                                <separator string="Ubicación de origen"/>
+                                <field name="location_id" domain="[('location_id','=', 11),('name','!=','VIRTUAL LOCATIONS / VENTAS')]" required='True' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </div>
+                        </group>
+                        <group>
+                            <div>
+                                <separator string="Ubicación Destino"/>
+                                <field name="location_dest_id" domain="[('location_id','=', 11),('name','!=','VIRTUAL LOCATIONS / VENTAS')]" required='True' attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            </div>
+                        </group>
+                        <field name="picking_type_id" readonly='True' />
+                        <field name="fecha" />
+
+                        <!-- <field name="modelo" string="Modelo" /> -->
+                    </group>
+                    <!-- <field name="product_ids" on_change='1' attrs="{'readonly': [('state', '!=', 'draft')]}"> -->
+                    <field name="product_ids" on_change='1'>
+                        <tree editable='Bottom'>
+                            <field name='product_id' on_change='_change_product_id(product_id,product_qty,product_uom_qty,context)' context="{'form_view_ref':'lafox.view_product_form_lafox'}" domain="[('blo_si_no','!=', True)]"/>
+                            <field name='product_qty' on_change='_change_product_id(product_id,product_qty,product_uom_qty,context)'/>
+                            <field name='product_uom_qty' on_change='_change_product_id(product_id,product_qty,product_uom_qty,context)'/>
+                            <field name='product_uom'/>
+                            <field name='descripcion_product'/>
+                            <field name='description' invisible='True'/>
+                            <field name='precio_mov' invisible='True'/>
+                        </tree>
+                    </field>
+                        <div>
+                            <field name='total_movimiento' readonly='True' />
+                        </div>
+                        <footer>
+                        <button name="button_approve_move2" string="Procesar" class="oe_highlight" type="object" size='100%' attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    </footer>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="lafox_movimientos_action2">
+            <field name="name">Movimientos</field>
+            <field name="res_model">lafox.movimiento.de.grupo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="domain">[]</field>
+            <field name="help">La Fox</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="lafox_movimientos_view_form" />
+        </record>
+
+        <record id="lafox_confirmar_movimientos_view_tree" model="ir.ui.view">
+            <field name="name">Confirmar Movimientos Tree</field>
+            <field name="model">lafox.movimiento.de.grupo</field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+
+                <tree string="Movimientos" colors="red:state =='cancelado'; #FF9900:state =='confirmed'; green:state=='aceptado'; blue:state=='draft'" edit='0' create ='0'>
+                    <field name="nomenclatura" />
+                    <field name="location_id" />
+                    <field name="location_dest_id" />
+                    <field name="fecha" />
+                    <field name="responsable_id" />
+                    <field name="total_movimiento" />
+                    <field name="state" />
+                    <button name="button_approve_move3" string="Confirmar" type="object" icon="gtk-go-forward" help="Confirmar Movimiento" invisible="0"  modifiers="{'invisible': [['state', 'not in', 'draft']], 'tree_invisible': false}"/>
+                    <button name="button_process_move" string="Aprobar" type="object" icon="gtk-go-forward" help="Aprobar Movimiento" invisible="0"     modifiers="{'invisible': [['state', 'not in', 'confirmed']], 'tree_invisible': false}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="lafox_confirmar_movimientos_view_form" model="ir.ui.view">
+            <field name="name">Confirmar Movimientos Form</field>
+            <field name="model">lafox.movimiento.de.grupo</field>
+            <field name="inherit_id" ref="lafox_movimientos_view_form"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//header" position="after">
+                        <button name="button_approve_move3" string="Confirmar Movimientos" type="object" icon="gtk-execute" class="oe_inline" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                        <button name="button_process_move" string="Aprobar Movimientos" type="object" icon="gtk-execute" class="oe_inline" attrs="{'invisible': [('state', '!=', 'confirmed')]}"/>
+                    </xpath>
+                     <xpath expr="//footer" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='fecha']" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                    </xpath>
+                    <!-- <xpath expr="//form" position="after">
+                        <header>
+                            <button name="button_approve_move3" string="Confirmar Movimientos" type="object" icon="gtk-execute" class="oe_inline"/>
+                        </header>
+                    </xpath> -->
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="lafox_confirmar_movimientos_action">
+            <field name="name">Confirmar Movimientos</field>
+            <field name="res_model">lafox.movimiento.de.grupo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="domain">[]</field>
+            <field name="help">La Fox</field>
+            <field name="view_id" ref="lafox_confirmar_movimientos_view_tree" />
+        </record>
+
+        <record model="ir.actions.act_window.view" id="lafox_confirmar_movimientos_action_form">
+            <field eval="1" name="sequence" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="lafox_confirmar_movimientos_view_tree" />
+            <field name="act_window_id" ref="lafox_confirmar_movimientos_action" />
+        </record>
+        <record model="ir.actions.act_window.view" id="lafox_confirmar_movimientos_action_tree">
+            <field eval="2" name="sequence" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="lafox_confirmar_movimientos_view_form" />
+            <field name="act_window_id" ref="lafox_confirmar_movimientos_action" />
+        </record>
+
+
+        <!-- VISTA PARA KARDEX -->
+
+
+        <record id="view_movimientos_form_inherit_confirm_k" model="ir.ui.view">
+            <field name="name">lafox.movimientos.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form" position="attributes">
+                        <attribute name="delete">false</attribute>
+                        <attribute name="create">false</attribute>
+                        <attribute name="edite">false</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='date']" position="after">
+                        <field name='supplier_id' readonly='True' />
+                        <field name='referencia' readonly='True' />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="view_movimientos_tree_inherit_confirm_k" model="ir.ui.view">
+            <field name="name">lafox.movimientos.tree</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//tree" position="attributes">
+                        <attribute name="create">false</attribute>
+                        <attribute name="delete">false</attribute>
+                        <attribute name="edit">false</attribute>
+                    </xpath>
+                    <xpath expr="//tree/field[@name='name']" position="after">
+                        <field name='supplier_id' readonly='True' />
+                    </xpath>
+
+                </data>
+            </field>
+        </record>
+
+        <!-- ACTION PARA LOS MOVIMIENTOS stock.location -->
+        <record model="ir.actions.act_window" id="lafox_action_kardex">
+            <field name="name">Kardex</field>
+            <field name="res_model">stock.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree,graph</field>
+            <field name="domain">[]</field>
+            <field name="help">La Fox</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="lafox_action_kardex_tree">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_movimientos_tree_inherit_confirm_k"/>
+            <field name="act_window_id" ref="lafox_action_kardex"/>
+        </record>
+         <record model="ir.actions.act_window.view" id="lafox_action_kardex_form">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_movimientos_form_inherit_confirm_k"/>
+            <field name="act_window_id" ref="lafox_action_kardex"/>
+        </record>
+
+       <!--MENUS LA FOX -->
+       <!-- NIVEL 1 CABECERA -->
+        <menuitem id="main_operaciones_menu" name="Operaciones"/>
+            <!-- NIVEL 2 ENCABEZADOS -->
+            <menuitem id="menu_operaciones_almacen" name="Operaciones Almacén" parent="main_operaciones_menu" sequence="1"/>
+            <menuitem id="menu_operaciones_contacs" name="Clientes y Proveedores" parent="main_operaciones_menu" sequence="2"/>
+            <menuitem id="menu_operaciones_cotizacion" name= "Producción" parent="main_operaciones_menu" sequence="3" />
+                            <!-- NIVEL 3 MENUS ACCIONES -->
+
+
+                    <!-- OPCIONES MENU OPERACIONES -->
+                <menuitem action="lafox_almacen_action" id="submenu_almacen" parent="menu_operaciones_almacen" name="Almacén Principal" sequence="1"/>
+                <menuitem action="lafox_ubicacion_action" id="submenu_ubicacion_suc" parent="menu_operaciones_almacen" name="Ubicaciones" sequence="2"/>
+                <!-- <menuitem action="lafox_movimientos_action" id="submenu_movimientos_suc" parent="menu_operaciones_almacen" name="Movimientos" sequence=""/> -->
+                <menuitem action="lafox_movimientos_action2" id="submenu_movimientos_suc2" parent="menu_operaciones_almacen" name="Movimientos" sequence="3"/>
+                <menuitem action="lafox_movimientos_action_confirm" id="submenu_movimientos_suc_confirm" parent="menu_operaciones_almacen" name=" Movimientos Fabrica" sequence="9"/>
+                <menuitem action="lafox_confirmar_movimientos_action" id="submenu_movimientos_suc_confirm2" parent="menu_operaciones_almacen" name="Estado Movimientos" sequence="4"/>
+                <menuitem action="lafox_movimientos_action_productos" id="submenu_productos" parent="menu_operaciones_almacen" name="Productos" sequence="6"/>
+                <menuitem action="action_lafox_entrada_inventario" id="submenu_asign_inventario" parent="menu_operaciones_almacen" name="Entrada Inventario" sequence="7"/>
+                <!-- <menuitem action="view_lafox_asignacion_inventario_action" id="submenu_asign_inventario" parent="menu_operaciones_almacen" name="Entrada Inventario" sequence="7"/> -->
+                <menuitem action="lafox_action_kardex" id="submenu_kardex" parent="menu_operaciones_almacen" name="Kardex" sequence="8"/>
+
+                <!-- OPCIONES MENU COTIZACIONES -->
+                <menuitem action="action_lafox_fabrica_producto" id="submenu_fabrica_producto" parent="menu_operaciones_cotizacion" name="Cotizacion de material" sequence="1" />
+
+                <menuitem action="action_lafox_less_product" id="subemenu_less_product" parent="menu_operaciones_cotizacion" name="Asignacion de material crudo" sequence="2" />
+
+                <!-- <menuitem action="action_lafox_carga_cotizacion" id="sub_carga_cotizcion" parent="menu_operaciones_cotizacion" name="Carga de cotizaciones" sequence="3" /> -->
+
+                <menuitem action="lafox_cotizacion_action" id="sub_lafox_cotizacion" parent="menu_operaciones_cotizacion" name="Cotizacion" sequence="4" />
+
+                <!-- OPCIONES MENU OPERACIONES -->
+
+                <menuitem action="lafox_movimientos_action_cliente" id="submenu_clientes" parent="menu_operaciones_contacs" name="Clientes" sequence="1"/>
+                <menuitem action="action_lafox_proveedor" id="submenu_proveedor" parent="menu_operaciones_contacs" name="Proveedores" sequence="2"/>
+
+    </data>
+</openerp>

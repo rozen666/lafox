@@ -1,0 +1,1142 @@
+<openerp>
+    <data>
+         <!-- VISTA TREE PARA lafox_resumen_abonos -->
+        <record id="lafox_resumen_abonos_tree" model="ir.ui.view">
+            <field name="name">Resumen de abonos</field>
+            <field name="model">lafox.resumen.abonos</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Informacion de abonos">
+                    <field name="date_abono"/>
+                    <field name="name"/>
+                    <field name="monto_credito"/>
+                    <field name="coment_abono"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- VISTA FORM PARA lafox_resumen_abonos -->
+
+        <record id="lafox_resumen_abonos_form" model="ir.ui.view">
+            <field name="name">Efectuar abonos</field>
+            <field name="model">lafox.resumen.abonos</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <sheet>
+                    <group string="Informacion de abonos">
+                        <field name="date_abono"/>
+                        <field name="name" widget='monetary' options="{'currency_field': 'currency_id'}" on_change="_on_change_monto_cambio(monto_credito,name,context)"/>
+                        <field name="monto_credito" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="cambio_devuelto"/>
+                        <field name="coment_abono"/>
+                    </group>
+                    <button name="action_paid_venta_abono" string="Guardar" type="object" class="oe_highlight"/>
+                </sheet>
+            </field>
+        </record>
+
+        <!-- ACTION PARA lafox_resumen_abonos -->
+
+        <record model="ir.actions.act_window" id="action_lafox_resumen_abonos">
+            <field name="name">Resumen de abonos</field>
+            <field name="res_model">lafox.resumen.abonos</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="lafox_resumen_abonos_form"/>
+            <field name="target">new</field>
+            <field name="help">La Fox</field>
+        </record>
+
+        <!-- ACTION TREE PARA lafox_resumen_abonos -->
+        <record model="ir.actions.act_window" id="action_lafox_resumen_abonos_tree">
+            <field name="name">Resumen de abonos</field>
+            <field name="res_model">lafox.resumen.abonos</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="lafox_resumen_abonos_tree"/>
+            <field name="domain">[('invoice_id', '=', active_id)]</field>
+            <field name="target">new</field>
+            <field name="help">La Fox</field>
+        </record>
+
+        <!-- Vista Form para Tipo de Cambio -->
+        <record id="view_lafox_realizar_pago_form" model="ir.ui.view">
+            <field name="name">Efectuar Pago</field>
+            <field name="model">lafox.realizar.pago</field>
+            <field name="arch" type="xml">
+                <form string="Efectuar Pago">
+                        <separator string="Efectuar Pago"/>
+                        <group col='4'>
+                            <h2>
+                                <label for = 'monto_total'/>
+                                <field name="monto_total" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                                <label for = 'monto_pagado'/>
+                                <field name="monto_pagado" on_change ='_on_change_monto_cambio(monto_total,monto_pagado,context)'/>
+                                <label for = 'monto_cambio'/>
+                                <field name="monto_cambio" readonly='True' widget='monetary' options="{'currency_field': 'currency_id'}" />
+                                <field name="currency_id" invisible='True'/>
+                            </h2>
+                        </group>
+                        <footer>
+                            <button name="action_paid_venta_money" string="Pagar" class="oe_highlight" type="object" confirm="¿Desea realizar el pago?" />
+                        </footer>
+              </form>
+            </field>
+           </record>
+
+        <record id="view_lafox_realizar_pago_action" model="ir.actions.act_window">
+            <field name="name">Efectuar Pago</field>
+            <field name="res_model">lafox.realizar.pago</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_realizar_pago_form"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+            <field name="help">La Fox</field>
+        </record>
+
+         <!-- Vista Form para Password de Precios Especiales -->
+        <record id="view_lafox_pass_PE_form" model="ir.ui.view">
+            <field name="name">Autorizar Precio Especial</field>
+            <field name="model">lafox.autorizacion.pe</field>
+            <field name="arch" type="xml">
+                <form string="Efectuar Pago">
+                        <separator string="Autorizar Precio Especial"/>
+                        <group col='4'>
+                            <h2>
+                                <label for = 'user_id'/>
+                                <field name="user_id" />
+                            </h2>
+                            <h2>
+                                <label for = 'password'/>
+                                <field name="password" password='1'/>
+                            </h2>
+                        </group>
+                        <footer>
+                            <button name="button_approve_precio_esp" string="Autorizar" class="oe_highlight" type="object" />
+                        </footer>
+              </form>
+            </field>
+           </record>
+
+        <record id="view_lafox_pass_PE_action" model="ir.actions.act_window">
+            <field name="name">Autorizar Precio Especial</field>
+            <field name="res_model">lafox.autorizacion.pe</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_pass_PE_form"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+            <field name="help">La Fox</field>
+        </record>
+
+        <!-- VISTA SEARCH PARA VENTAS ACCOUNT_INVOICE -->
+        <record model="ir.ui.view" id="view_lafox_ventas_search">
+              <field name="name">Ventas Search</field>
+              <field name="model">account.invoice</field>
+              <field name="arch" type="xml">
+                <search string="Búsqueda de Ventas">
+                    <field name="nomenclatura" string='Código Venta'/>
+                    <field name="user_id" string='Responsable'/>
+                    <field name="partner_id" string='Cliente' />
+                    <!-- <field name="check_credito" string='Tipo de Venta'/> -->
+                    <field name="fecha_venta" />
+                    <!-- <field name="fecha_venta_6" invisible='True'/> -->
+                    <field name="state" />
+
+                    <group string="Agrupar por..." groups="base.group_no_one,lafox.group_lafox_admr">
+                        <filter name="group_cred_id" string="Ventas(Crédito/Efectivo)" icon="terp-partner" context="{'group_by':'check_credito'}" />
+                        <filter name="group_type_id" string="Ventas(Accesorios/Terminado)" icon="terp-partner" context="{'group_by':'tipo_producto'}" />
+                        <filter name="group_vend_id" string="Vendedor" icon="terp-partner" context="{'group_by':'user_id'}" />
+                        <filter name="group_cli_id" string="Cliente" icon="terp-partner" context="{'group_by':'partner_id'}" />
+
+                    </group>
+                </search>
+
+             </field>
+            </record>
+
+        <!-- VISTA FORM PARA CAJA CHICA ACCOUNT_INVOICE -->
+         <record model="ir.ui.view" id="view_lafox_ventas_tree">
+            <field name="name">view.lafox.ventas.tree</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="priority" eval="28"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/tree" position="attributes">
+                      <attribute name="colors">red:state == 'cancel'; #FF9900:state == 'open'; green:state=='paid'; blue:state=='draft'</attribute>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='partner_id']" position="before">
+                        <field name="nomenclatura"/>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='date_invoice']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='date_invoice']" position="after">
+                        <field name="tipo_producto"/>
+                        <field name="fecha_venta" string='Fecha Venta'/>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='commercial_partner_id']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='number']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='date_due']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='journal_id']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='period_id']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='origin']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/tree/field[@name='residual']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- VISTA FORM PARA CAJA CHICA ACCOUNT_INVOICE -->
+        <record model="ir.ui.view" id="view_lafox_ventas_form">
+            <field name="name">view.lafox.ventas.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="priority" eval="28"/>
+            <!-- <field name="mode">primary</field> -->
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='partner_id']" position="attributes">
+                        <attribute name="context">{'form_view_ref':'lafox.view_cliente_form_cativi'}</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='action_cancel_draft']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='action_invoice_sent']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='invoice_print']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='action_invoice_sent']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='invoice_open']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='invoice_pay_customer']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='invoice_proforma2']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <field name="payment_term" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </field>
+                    <xpath expr="/form/sheet/notebook/page[@string='Other Info']" position="attributes">
+                        <attribute name="invisible">False</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[@string='Payments']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/group/group[2]/field[@name='journal_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='%(account.action_account_state_open)d']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='%(account.action_account_invoice_refund)d']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/group/group[2]/field[@name='account_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='invoice_cancel']" position="replace">
+                            <!-- <button name="button_print_pdf2" string="TIQUET" type="object"/> -->
+                            <button name="button_action_cancel_draft" string="Cancelar Venta" type="object" attrs="{'invisible': [('state', 'in', ('cancel'))]}" groups="base.group_no_one, lafox.group_lafox_admr"/>
+                            <button name="action_paid_venta" string="Ejecutar Venta" type="object" attrs="{'invisible': [('state_ac', 'in', ('cancel','open','paid'))]}" groups="base.group_no_one, lafox.group_lafox_admr" />
+                            <button name="%(view_lafox_realizar_pago_action)d" string="Ejecutar Pago" type="action" attrs="{'invisible': [('state_ac', 'not in', 'open')]}"/>
+                            <button name="%(view_lafox_pass_PE_action)d" string="Autorizar Precio Especial" type="action"  class="oe_highlight" icon="fa-mail-forward"/>
+                            <button name="%(action_lafox_resumen_abonos)d" string="Abono" type="action" attrs="{'invisible': [('check_credito', '!=', 'True'), ('state_ac', 'in', ('paid','cancel','draft'))]}"/>
+                            <button name="%(action_lafox_resumen_abonos_tree)d" string="Resumen" type="action" attrs="{'invisible': [('check_credito', '!=', 'True'), ('state_ac', 'in', ('cancel','draft'))]}"/>
+                    </xpath>
+                    <field name="fiscal_position" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </field>
+                    <xpath expr="/form/sheet/h1" position="after">
+                        <h1>
+                            <field name='nomenclatura' readonly='True'/>
+                        </h1>
+                        <field name='tiquet_pdf' readonly='True'/>
+                    </xpath>
+                    <xpath expr="/form/sheet/h1" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='account_id']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <!-- <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']" position="attributes">
+                        <attribute name="attrs">{'readonly': [('state', 'notin',   'paid')]}</attribute>
+                    </xpath> -->
+                    <xpath expr="/form/sheet/notebook/page[1]" position="attributes">
+                        <attribute name="string">Lineas de Captura</attribute>
+                    </xpath>
+                    <field name="date_invoice" position="before">
+                        <field name="fecha_venta" string = 'Fecha Venta'/>
+                        <field name="fecha_venta_6" invisible='True'/>
+                        <!-- <field name="stock_venta" domain="[('location_id','=',11),('usage','=','internal')]" readonly="False"/> -->
+                        <field name="stock_venta" readonly="False"/>
+                        <field name="price_before_dlls" string="Precio dolar" readonly="True"/>
+                        <field name="esca_cliente" string="Escala de descuento"/>
+                        <field name="check_credito" attrs="{'invisible': [('tipo_venta', '!=', 'VENTA')]}" />
+                        <field name='des_temporada'  invisible='True'/>
+                        <field name='des_temporadaa' />
+                        <field name="check_visible" invisible='True'/>
+                    </field>
+                    <field name="date_invoice" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </field>
+                    <xpath expr="//field[@name='partner_id']" position="attributes">
+                        <attribute name="domain">[('supplier', '=',False), ('producto_pref', '=', tipo_producto)]</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='partner_id']" position="before">
+                        <field name = "tipo_producto" readonly ='False' />
+                        <field name = "tip_product" readonly="False" />
+                        <!-- <field name = "tipo_producto" required='True' attrs="{'readonly': [('nomenclatura', '!=', False)]}" /> -->
+                        <field name="validador"/>
+                    </xpath>
+                    <xpath expr="//field[@name='tipo_venta']" position="after">
+                        <field name="check_esp" on_change='change_price_esp(check_esp,invoice_line,context)' attrs="{'invisible': [('check_visible', '!=', True)]}"/>
+                    </xpath>
+
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']" position="attributes">
+                        <attribute name="context">{'tipo_producto':tipo_producto}</attribute>
+                    </xpath>
+                     <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="context">{'form_view_ref':'lafox.view_product_form_lafox', 'tree_view_ref':'lafox.view_product_tree_lafox', 'tipo_producto':tipo_producto ,'in_context':True}</attribute>
+                        <attribute name="domain">[('c_t','=',tipo_producto),('blo_si_no','!=',True)]</attribute>
+                        <attribute name="on_change">product_id_change_lf(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position, price_unit, parent.currency_id, parent.company_id,parent.check_esp,context)</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='name']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='quantity']" position="attributes">
+                        <attribute name="string">Piezas</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='quantity']" position="before">
+                        <field name='descripcion_invoice' string='Descripcion' />
+                        <field name='cantidad_producto' on_change="_cantidad_piezas(cantidad_producto,product_id,price_unit, parent.partner_id,check_visible,price_unit_false,context)" string='Cantidad'/>
+                        <field name='cliente_account' string="Cliente" invisible="True" />
+                    </xpath> 
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='clave_prod_serv']" position="attributes">
+                        <attribute name="required">0</attribute>
+                    </xpath> 
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='clave_unidad']" position="attributes">
+                        <attribute name="required">0</attribute>
+                    </xpath> 
+                     <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='quantity']" position="attributes">
+                        <attribute name="invisible">0</attribute>
+                    </xpath>                    
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='price_unit']" position="before">
+                        <field name="check_visible"/>
+                        <field name="price_unit_des" required='True'/>
+                        <field name="price_unit_false" required='True' on_change='_onchage_priceunit(product_id,price_unit_false,check_visible,cantidad_producto,context)' />
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='price_unit']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='price_subtotal']" position="attributes">
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='price_subtotal']" position="after">
+                        <field name='monto_pago' />
+                    </xpath> 
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']" position="after">
+                        <group>
+                            <field name='devolver' />
+                        </group>
+                        <separator string="Devoluciones" attrs="{'invisible': [('devolver', '==', False)]}"/>
+                            <field name='devolucion_id' attrs="{'invisible': [('devolver', '==', False)], 'readonly': [('state', 'not in', 'draft')]}">
+                                <tree editable='Bottom'>
+                                    <field name='product_id' on_change='product_id_change(product_id,uos_id,piezas_qty,description,parent.type,parent.partner_id,parent.fiscal_position,precio_lst,parent.currency_id,parent.company_id,parent.check_esp,context)' options="{'create': false, 'create_edit': false, 'no_open' : True}"/>
+                                    <field name='description' />
+                                    <field name='product_uom_qty' on_change='_onchange_cantidad(product_uom_qty,product_id,precio_lst,parent.partner_id,check_visible,price_unit_false,context)'/>
+                                    <field name='piezas_qty' />
+                                    <field name="check_visible" invisible='False'/>
+                                    <field name='uos_id' invisible='True'/>
+                                    <field name='precio_mov' />
+                                    <field name='precio_lst' invisible='1'/>
+                                    <field name='price_unit_false' on_change='_onchage_priceunit(product_id,price_unit_false,check_visible,product_uom_qty,context)' />
+                                    <!-- <field name='invoice_line_tax_id' widget='many2many_tags'/> -->
+                                    <field name='amount' /> 
+                                    <field name='estado_mer' /> 
+                                    <!-- <field name='impuesto' />                                   -->
+                                </tree>
+                            </field>
+                    </xpath> 
+                    <xpath expr="/form/sheet/notebook/page[1]/group/field[@name='saldo_pediente']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/group/field[@name='amount_untaxed']" position="before">
+                        <field name='total_dev_imp' invisible = '1'  widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name='total_dev' attrs="{'invisible': [('devolver', '==', False)]}"  widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='bind_buttom']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='button_cancel_factura']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/header/button[@name='button_consul_estatus']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/group/field[@name='amount_total']" position="before">
+                        <field name="precio_temporada"  widget='monetary' options="{'currency_field': 'currency_id'}" />
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='clave_prod_serv']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='clave_unidad']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/group/field[@name='amount_total']" position="after">
+                        <field name="saldo_credito" widget='monetary' options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('check_credito', '==', False)]}" readonly="True"/>
+                        <field name="saldo_abonado" widget='monetary' options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('check_credito', '==', False)]}" readonly="True"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_la_fox_venta">
+            <field name="name">Ventas La Fox</field>
+            <field name="res_model">account.invoice</field>
+            <field name="context">{}</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_lafox_ventas_tree"/>
+            <field name="search_view_id" ref="view_lafox_ventas_search"/>
+            <field name="help">La Fox</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_la_fox_venta_tree">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_lafox_ventas_tree"/>
+            <field name="act_window_id" ref="action_la_fox_venta"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_la_fox_venta_form">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_ventas_form"/>
+            <field name="act_window_id" ref="action_la_fox_venta"/>
+        </record>
+
+        <!-- VISTA FORM PARA ACCOUNT_INVOICE SIN EDICION DE PRECIO LISTA -->
+        <record model="ir.ui.view" id="view_lafox_venta_form_no_edit_price">
+            <field name="name">view.lafox.ventas.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="view_lafox_ventas_form"/>
+            <field name="priority" eval="28"/>
+            <field name="mode">primary</field> 
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='price_unit']" position="after">
+                        <field name="price_unit_lst" />
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='price_unit']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='price_unit_false']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='check_visible']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='devolucion_id']/tree/field[@name='check_visible']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/sheet/notebook/page[1]/field[@name='devolucion_id']/tree/field[@name='price_unit_false']" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="action_venta_form_no_edit_price">
+            <field name="name">Ventas La Fox</field>
+            <field name="res_model">account.invoice</field>
+            <field name="context">{}</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_lafox_ventas_tree"/>
+            <field name="search_view_id" ref="view_lafox_ventas_search"/>
+            <field name="help">La Fox</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_venta_form_no_edit_price_tree">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_lafox_ventas_tree"/>
+            <field name="act_window_id" ref="action_venta_form_no_edit_price"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_venta_form_no_edit_price_form">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_venta_form_no_edit_price"/>
+            <field name="act_window_id" ref="action_venta_form_no_edit_price"/>
+        </record>
+
+       <!-- Vista search de el seguimiento de pedido -->
+        <record id="view_search_seguimiento" model="ir.ui.view">
+              <field name="name">Seguimiento de Pedido Search</field>
+              <field name="model">lafox.seguimiento.pedido</field>
+              <field name="arch" type="xml">
+                <search string="Búsqueda de Seguimientos de Pedido">
+                    <field name="pedido" />
+                    <field name="fecha_envio" />
+                    <field name="fecha_entrega" />
+                    <field name="grupo_ventas_facturacion" />
+                    <field name="estatus" />
+
+                </search>
+             </field>
+            </record>
+
+        <!-- Vista tree de el seguimiento de pedido -->
+        <record id="lafox_seguimiento_pedido_view_tree" model="ir.ui.view">
+            <field name="name">Vista de Seguimiento de pedido</field>
+            <field name="model">lafox.seguimiento.pedido</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Informacion del Seguimiento">
+                  <field name="pedido"/>
+                  <field name="estatus"/>
+                  <field name="descripcion"/>
+                </tree>
+            </field>
+        </record>
+
+          <!-- Vista FORM de el seguimiento de pedido -->
+        <record id="lafox_seguimiento_pedido_view_form" model="ir.ui.view">
+            <field name="name">Seguimiento de pedido</field>
+            <field name="model">lafox.seguimiento.pedido</field>
+            <field name="type">form</field>
+
+            <field name="arch" type="xml">
+                <header>
+                  <field name="estatus" widget="statusbar" clickable="True" statusbar_colors="{'P':'green',‘E’:’yellow’,’R’:’red’}"/>
+                </header>
+                <sheet>
+                  <group string="Informacion del seguimiento">
+                    <field name="pedido"/>
+                    <!-- <field name="estatus"/> -->
+                    <field name="fecha_envio"/>
+                    <field name="fecha_entrega"/>
+                    <field name="grupo_ventas_facturacion"  options="{'no_quick_create':true, 'no_create_edit':true, 'no_create': True}"/>
+                    <field name="descripcion" placeholder="Observaciones"/>
+                  </group>
+                </sheet>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="lafox_seguimiento_pedido_view_kanban">
+            <field name="name">lafox.seguimiento.pedido.view.kanban</field>
+            <field name="model">lafox.seguimiento.pedido</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="estatus">
+                    <templates>
+                        <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_color_#{kanban_getcolor(0)} oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_dropdown_toggle oe_dropdown_kanban">
+                                    <span class="oe_e">í</span>
+                                    <ul class="oe_dropdown_menu">
+                                        <t t-if="widget.view.is_action_enabled('edit')"><li><a type="edit">Editar...</a></li></t>
+                                        <t t-if="widget.view.is_action_enabled('delete')"><li><a type="delete">Borrar...</a></li></t>
+                                        <li><a name="95" type="action">Revisar Email</a></li>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div>
+                                        <b><field name="grupo_ventas_facturacion"/></b>
+                                        <p style="color:blue"><field name="estatus"/></p>
+                                        <p style="color:red"><field name="descripcion"/></p>
+                                    </div>
+                                    <div>
+                                        <field name="pedido"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <img t-att-src="kanban_image('res.company', 'image_small', record.logo)" width="24" height="24" class="oe_kanban_avatar pull-right"/>
+                                        <div class="pull-left" groups="base.group_user">
+                                            <field name="estatus" widget="kanban_state_selection"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oe_clear"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_la_fox_seg_pedido">
+            <field name="name">Seguimiento de Pedido</field>
+            <field name="res_model">lafox.seguimiento.pedido</field>
+            <field name="context">{}</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="lafox_seguimiento_pedido_view_tree"/>
+            <field name="search_view_id" ref="view_search_seguimiento"/>
+            <field name="help">La Fox</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_la_fox_ventas_tree">
+            <field name="view_mode">tree</field>
+            <field eval="2" name="sequence"/>
+            <field name="view_id" ref="lafox_seguimiento_pedido_view_tree"/>
+            <field name="act_window_id" ref="action_la_fox_seg_pedido"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_la_fox_ventas_form">
+            <field name="view_mode">form</field>
+            <field eval="3" name="sequence"/>
+            <field name="view_id" ref="lafox_seguimiento_pedido_view_form"/>
+            <field name="act_window_id" ref="action_la_fox_seg_pedido"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_la_fox_ventas_kanban">
+            <field name="view_mode">kanban</field>
+            <field eval="1" name="sequence"/>
+            <field name="view_id" ref="lafox_seguimiento_pedido_view_kanban"/>
+            <field name="act_window_id" ref="action_la_fox_seg_pedido"/>
+        </record>
+
+        <!-- INIVIO VISTA REPORTE CORTE Z -->
+        <record model="ir.ui.view" id="view_lafox_report_daily_corteventas_filter">
+            <field name="name">view.lafox.report.daily.corteventas.filter</field>
+            <field name="model">lafox.corteparcial.venta</field>
+            <field name="arch" type="xml">
+                <search string="Corte Z">
+<!--                     <filter icon="terp-stock_align_left_24" string="My Attendance" name="my_atten_punch"/>
+ -->                    <field name="nomenclatura_venta"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_lafox_report_daily_corteventas_tree" model="ir.ui.view">
+            <field name="name">view.lafox.report.daily.corteventas.tree</field>
+            <field name="model">lafox.corteparcial.venta</field>
+             <field name="arch" type="xml" >
+                <tree string="Corte Parcial" create="false">
+                <!-- <tree string="Corte Z" create="false" colors="red:punch in ('1');green:punch in ('2');"> -->
+                    <field name="nomenclatura_venta"/>
+                    <field name="cliente_venta"/>
+                    <field name="fecha_venta"/>
+                    <field name="responsable_venta"/>
+                    <field name="total_venta"/>
+                    <field name="estatus_venta" invisible ='True'/>
+                    <!-- <field name="code_venta" string='Venta'/> -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_lafox_report_daily_corteventas_graph" model="ir.ui.view">
+            <field name="name">view_lafox.report.daily.corteventas.graph</field>
+            <field name="model">lafox.corteparcial.venta</field>
+            <field name="arch" type="xml">
+                <graph string="Corte Parcial" type="bar" stacked="True">
+                    <field name="nomenclatura_venta" type="row"/>
+                    <field name="total_venta" type="measure"/>
+                    <field name="estatus_venta" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_lafox_daily_cortez_report_all" model="ir.actions.act_window">
+            <field name="name">Corte Parcial La Fox</field>
+            <field name="res_model">lafox.corteparcial.venta</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,graph</field>
+            <field name="limit">100</field>
+            <field name="context">{'search_default_my_atten_punch':1, 'group_by':['estatus_venta']}</field>
+            <field name="search_view_id" ref="view_lafox_report_daily_corteventas_filter" />
+            <field name="help">La Fox</field>
+        </record>
+
+        <!-- Vista Form para Tipo de Cambio -->
+        <record id="view_lafox_change_type_form" model="ir.ui.view">
+            <field name="name">Tipo de Cambio</field>
+            <field name="model">lafox.change.monetary</field>
+            <field name="arch" type="xml">
+                <form string="Tipo de Cambio">
+                    <separator string="Dolar hoy en México"/>
+                    <group colspan='2' col='4'>
+                        <field name="price_dolar" require="True"/>
+                        <field name="porcentaje_cambio" require="True"/>
+                        <field name="precio_actual_dolar" readonly="True" />
+                        <field name="porcentaje_cambio_before" readonly='True'/>
+                        <field name="price_before" readonly='True'/>
+                        <field name="fecha_cambio" readonly='True'/>
+                        <field name="currency_id" readonly='True'/>
+                    </group>
+                    <footer>
+                      <button name="button_change_money" string="Aceptar" class="oe_highlight" type="object" confirm="¿Desea realizar el tipo de cambio?" />
+                    </footer>
+              </form>
+            </field>
+           </record>
+
+        <record id="view_lafox_change_type_action" model="ir.actions.act_window">
+            <field name="name">Tipo de Cambio</field>
+            <field name="res_model">lafox.change.monetary</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_lafox_change_type_form"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+            <field name="help">La Fox</field>
+        </record>
+
+
+         <record id="view_lafox_corte_z_form" model="ir.ui.view">
+            <field name="name">view.lafox.corte.z.form</field>
+            <field name="model">lafox.corte.z</field>
+            <field name="arch" type="xml">
+                <form string="Formulario para CORTE Z">
+                    <group>
+                        <field name="fecha_corte_z" onchange="1"/>
+                        <field name="total_corte_z" />
+                        <field name="almacen_id" onchange="1"/>
+                        <field name="total_corte" invisible='1'/>
+                        <field name="can_view" invisible='1'/>
+                    </group>
+                    <group>
+                        <field name="registros_z_O" readonly='True'>
+                            <tree editable='Bottom'>
+                                <field name="nomenclatura_venta_z" required = 'True'/>
+                                <field name="cliente_venta_z" required = 'True'/>
+                                <field name="fecha_venta_z" required = 'True'/>
+                                <field name="responsable_venta_z" required = 'True'/>
+                                <field name="total_venta_z" required = 'True'/>
+                                <field name="estatus_venta_z" required = 'True'/>
+                            </tree>
+                        </field>
+                    </group>
+
+                    <footer>
+                        <button name="button_corte_z"
+                                string="Corte Z"
+                                class="oe_highlight"
+                                icon="gtk-execute"
+                                type="object"
+                                attrs="{'invisible': [('can_view', '=', True)]}"
+                                confirm="El CORTE Z se guardara y NO PODRA realizar mas ventas por hoy..."/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="lafox_corte_z_action" model="ir.actions.act_window">
+          <field name="name">Corte Z</field>
+          <field name="res_model">lafox.corte.z</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="view_lafox_corte_z_form"/>
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+          <field name="target">new</field>
+          <field name="help">La Fox</field>
+      </record>
+
+    <!-- VISTA CORTE Z TREE -->
+    <record id="view_lafox_corte_z_tree" model="ir.ui.view">
+        <field name="name">lafox.corte.z.tree</field>
+        <field name="model">lafox.corte.z</field>
+        <field name="arch" type="xml">
+            <tree string= "CORTE DEL DIA" edit='0' create ="0">
+                <field name="fecha_corte_z" />
+                <field name="almacen_id" />
+                <field name="total_corte" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_lafox_corte_z_graph" model="ir.ui.view">
+            <field name="name">view.lafox.ventas.graph</field>
+            <field name="model">lafox.corte.z</field>
+            <field name="arch" type="xml">
+                <graph string="Reporte de Ventas" type="bar" stacked="True">
+                    <field name="fecha_corte_z" type="row"/>
+                    <field name="total_corte" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+         <record model="ir.ui.view" id="view_lafox_corte_z_form2">
+            <field name="name">view.lafox.ventas.form</field>
+            <field name="model">lafox.corte.z</field>
+            <field name="inherit_id" ref="view_lafox_corte_z_form"/>
+            <field name="mode">primary</field> 
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/footer" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//form" position="attributes">
+                        <attribute name="create">false</attribute>
+                        <attribute name="delete">false</attribute>
+                        <attribute name="edit">false</attribute>                        
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+      <record id="lafox_corte_z_action_report" model="ir.actions.act_window">
+          <field name="name">Reportes Corte Z</field>
+          <field name="res_model">lafox.corte.z</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,graph,form</field>
+          <field name="view_id" ref="view_lafox_corte_z_tree"/>
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+          <field name="help">La Fox</field>
+      </record>
+
+      <record model="ir.actions.act_window.view" id="lafox_corte_z_action_report_tree">
+            <field name="view_mode">tree</field>
+            <field eval="1" name="sequence"/>
+            <field name="view_id" ref="view_lafox_corte_z_tree"/>
+            <field name="act_window_id" ref="lafox_corte_z_action_report"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="lafox_corte_z_action_report_form">
+            <field name="view_mode">form</field>
+            <field eval="2" name="sequence"/>
+            <field name="view_id" ref="view_lafox_corte_z_form2"/>
+            <field name="act_window_id" ref="lafox_corte_z_action_report"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="lafox_corte_z_action_report_graph">
+            <field name="view_mode">graph</field>
+            <field eval="3" name="sequence"/>
+            <field name="view_id" ref="view_lafox_corte_z_graph"/>
+            <field name="act_window_id" ref="lafox_corte_z_action_report"/>
+        </record>
+      <!--  Se crea la vista de el reporte de venta  dentro del menu de TIPO DE CAMBIO  -->
+      <record id="view_lafox_reporte_venta_form" model="ir.ui.view">
+          <field name="name">view.lafox.reporte.venta.form</field>
+          <field name="model">lafox.reporte.de.venta</field>
+          <field name="arch" type="xml">
+              <form string="Reporte de ventas.">
+                <group>
+                    <field name="fecha_inicio" on_change="_llenado_reporte_venta(fecha_inicio,fecha_final,seleccion_cliente,seleccion_vendedor,seleccion_producto,filtro_descuentos,seleccion_tipo,seleccion_pro,context)" required = 'True'/>
+                    <field name="fecha_final" on_change="_llenado_reporte_venta(fecha_inicio,fecha_final,seleccion_cliente,seleccion_vendedor,seleccion_producto,filtro_descuentos,seleccion_tipo,seleccion_pro,context)" required = 'True'/>
+                    <field name="seleccion_pro" on_change="_llenado_reporte_venta(fecha_inicio,fecha_final,seleccion_cliente,seleccion_vendedor,seleccion_producto,filtro_descuentos,seleccion_tipo,seleccion_pro,context)"/>
+                  </group>
+                  <group  attrs="{'invisible': [('seleccion_pro', '!=', False)]}">
+                      <field name="seleccion_cliente" on_change="_llenado_reporte_venta(fecha_inicio,fecha_final,seleccion_cliente,seleccion_vendedor,seleccion_producto,filtro_descuentos,seleccion_tipo,seleccion_pro,context)"/>
+                      <field name="seleccion_vendedor" on_change="_llenado_reporte_venta(fecha_inicio,fecha_final,seleccion_cliente,seleccion_vendedor,seleccion_producto,filtro_descuentos,seleccion_tipo,seleccion_pro,context)"/>
+                      <field name="seleccion_producto" on_change="_llenado_reporte_venta(fecha_inicio,fecha_final,seleccion_cliente,seleccion_vendedor,seleccion_producto,filtro_descuentos,seleccion_tipo,seleccion_pro,context)"/>
+                      <field name="filtro_descuentos"  on_change="_llenado_reporte_venta(fecha_inicio,fecha_final,seleccion_cliente,seleccion_vendedor,seleccion_producto,filtro_descuentos,seleccion_tipo,seleccion_pro,context)"/>
+                      <field name="seleccion_tipo"  on_change="_llenado_reporte_venta(fecha_inicio,fecha_final,seleccion_cliente,seleccion_vendedor,seleccion_producto,filtro_descuentos,seleccion_tipo,seleccion_pro,context)"/>
+                  </group>
+                    
+                  <group>
+                      <field name="registro_One2many" readonly='True'>
+                          <tree editable='Bottom'>
+                              <field name="nomenclatura_venta_rv" required = 'True'/>
+                              <field name="cliente_venta_rv" required = 'True'/>
+                              <field name="fecha_venta_rv" required = 'True'/>
+                              <field name="estatus_venta_rv" required = 'True'/>
+                              <field name="prod_name_rv" required = 'True'/>
+                              <field name="seleccion_pro" string ='Clave Producto' required = 'True'/>
+                              <field name="total_venta_rv" required = 'True'/>
+                          </tree>
+                      </field>
+                          <field name='serials_qty' widget="statinfo" />
+                          <field name='serials_pac' widget="statinfo" />
+                          <field name='ventas_qty' widget="statinfo" />
+                  </group>
+
+                 <!--  <footer>
+                      <button name="button_reporte_de_venta"
+                              string="Generar"
+                              class="oe_highlight"
+                              icon="gtk-execute"
+                              type="object"
+                              confirm="Se ejecutara la busqueda en base a los parametros seleccionados."/>
+                  </footer> -->
+              </form>
+          </field>
+      </record>
+
+      <record id="lafox_reporte_de_venta_action" model="ir.actions.act_window">
+        <field name="name">Reporte de Venta</field>
+        <field name="res_model">lafox.reporte.de.venta</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_lafox_reporte_venta_form"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+        <field name="help">La Fox</field>
+    </record>
+
+
+    <!-- VISTA DEVOLUCIONES TREE -->
+
+    <record id="view_lafox_devolucion_credito_tree" model="ir.ui.view">
+        <field name="name">view.lafox.devolucion.credito.tree</field>
+        <field name="model">lafox.devolucion.credito</field>
+        <field name="arch" type="xml">
+            <tree string= "Devoluciones">
+                <field name="cliente" />
+                <field name="devolucion_id" />
+                <field name="total_movimientos" />
+                <field name="maximo_dev" />
+                <!-- <field name="precio_lst" /> -->
+                <!-- <field name="amount" /> -->
+            </tree>
+        </field>
+    </record>
+
+     <!-- VISTA DEVOLUCIONES FORM -->
+        <record id="view_lafox_devolucion_form" model="ir.ui.view">
+            <field name="name">view.lafox.devolucion.form</field>
+            <field name="model">lafox.devolucion.credito</field>
+            <field name="arch" type="xml">
+                <form string="Devoluciones">
+                    <header>
+                            <field name="state" widget="statusbar" readonly='True' statusbar_visible="draft,confirmed" statusbar_colors='{"cancelado":"red","draft":"blue"}'/>
+                        </header>
+                    <sheet>
+                        
+                        <group>
+                            <field name="cliente"  attrs="{'readonly':[('state', '==', 'confirmed')]}"/>
+                            <field name="con_venta" attrs="{'readonly':[('state', '==', 'confirmed')]}"/>
+                            <field name="ventas_id" domain="[('partner_id','=',cliente)]"  attrs="{'invisible': [('cliente', '==', False)], 'readonly':[('state', '==', 'confirmed')]}"/>
+                        </group>
+                        <!-- <group attrs="{'invisible': [('cliente', '=', False)]}"> -->
+                             <separator string="Devoluciones" attrs="{'invisible': [('cliente', '==', False)]}"/>
+                                <field name='devolucion_id' attrs="{'invisible': [('cliente', '==', False)], 'readonly':[('state', '==', 'confirmed')]}">
+                                    <tree editable='Bottom'>
+                                        <field name='product_id' on_change='product_id_change_lf(product_id,uos_id,piezas_qty,description,parent.cliente,precio_lst,context)' options="{'create_edit': false, 'no_open' : True}"/>
+                                        <field name='description' />
+                                        <field name='product_uom_qty' on_change='_onchange_cantidad(product_uom_qty,product_id,precio_lst,parent.cliente,check_visible,price_unit_false,context)'/>
+                                        <field name='piezas_qty' />
+                                        <field name="check_visible" invisible='False'/>
+                                        <field name='uos_id' invisible='True'/>
+                                        <field name='precio_mov' />
+                                        <field name='precio_lst' invisible='1'/>
+                                        <field name='price_unit_false' on_change='_onchage_priceunit(product_id,price_unit_false,check_visible,product_uom_qty,context)' />
+                                        <!-- <field name='invoice_line_tax_id' widget='many2many_tags'/> -->
+                                        <field name='amount' /> 
+                                        <field name='estado_mer' />                                    
+                                    </tree>
+                                </field>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name='total_movimientos' widget='monetary' options="{'currency_field': 34}" attrs="{'readonly': [('total_movimientos', '!=', False)]}"/>                                    
+                            <field name='maximo_dev' widget='monetary' options="{'currency_field': 34}" invisible= 'True'/>                                    
+                        </group>
+                        <footer>
+                            <button name="button_aprove_devo" string="Realizar Devolución" class="oe_highlight" type="object" attrs="{'invisible': ['|',('cliente', '==', False),('state', '==', 'confirmed')]}" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACTION PARA DEVOLUCIONES -->
+        <record id="view_lafox_devolucion_credito_action" model="ir.actions.act_window">
+          <field name="name">Devoluciones</field>
+          <field name="res_model">lafox.devolucion.credito</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <field name="view_id" ref="view_lafox_devolucion_credito_tree"/>
+          <field name="domain">[]</field>
+          <field name="context">{'cliente':True}</field>
+          <field name="target"></field>
+          <field name="help">La Fox</field>
+        </record>
+
+
+        <record model="ir.actions.act_window.view" id="action_lafox_devolucion_credito_tree">
+            <field name="view_mode">tree</field>
+            <field eval="1" name="sequence"/>
+            <field name="view_id" ref="view_lafox_devolucion_credito_tree"/>
+            <field name="act_window_id" ref="view_lafox_devolucion_credito_action"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_lafox_devolucion_credito_form">
+            <field name="view_mode">form</field>
+            <field eval="2" name="sequence"/>
+            <field name="view_id" ref="view_lafox_devolucion_form"/>
+            <field name="act_window_id" ref="view_lafox_devolucion_credito_action"/>
+        </record>
+
+        <!-- VISTA TREE PARA lafox_abonos -->
+
+        <record id="lafox_abonos_tree" model="ir.ui.view">
+            <field name="name">Abonos</field>
+            <field name="model">lafox.abonos</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Abonos">
+                    <field name="name"/>
+                    <field name="monto_abono"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- VISTA TREE PARA lafox_abonos -->
+
+        <record id="lafox_abonos_form" model="ir.ui.view">
+            <field name="name">Abonos</field>
+            <field name="model">lafox.abonos</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <sheet>
+                    <group string="Abonos">
+                        <field name="name"/>
+                        <field name="abonos_many">
+                            <tree editable="Button" create ="0">
+                                <field name="name" readonly="True"/>
+                                <field name="account_id" context="{'form_view_ref' : 'lafox.view_lafox_ventas_form'}"/>
+                                <field name="total_nota" readonly="True"/>
+                                <field name="total_adeudo" readonly="True"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </field>
+        </record>
+
+        <!-- ACTION PARA lafox_abonos -->
+
+        <record id="action_lafox_abonos" model="ir.actions.act_window">
+            <field name="name">Abonos</field>
+            <field name="res_model">lafox.abonos</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="lafox_abonos_form"/>
+            <field name="target">new</field>
+            <field name="help"/>
+        </record>
+
+<!-- VISTA TREE PARA lafox.reporte.cliente -->
+
+        <record id="lafox_reporte_cliente_tree" model="ir.ui.view">
+            <field name="name">Reporte</field>
+            <field name="model">lafox.reporte.cliente</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Reporte">
+                    <field name="name"/>
+                    <field name="total_ventas"/>
+                    <field name="total_credito"/>
+                    <field name="total_abonos"/>
+                    <field name="saldo_faltante"/>
+                </tree>
+            </field>
+        </record>
+
+
+         <!-- VISTA FORM PARA lafox.reporte.cliente -->
+
+        <record id="lafox_reporte_cliente_form" model="ir.ui.view">
+            <field name="name">Reporte</field>
+            <field name="model">lafox.reporte.cliente</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state_credito" readonly='True' widget='statusbar'/>
+                    </header>
+                    <sheet>
+                        <group string="Reporte">
+                            <field name="name" on_change="_llenado_reporte_venta(name,context)" required = 'True'/>
+                            <field name="registro_one2many" options="{'create': false, 'create_edit': false, 'no_open' : True}" readonly='True'>
+                                <tree >
+                                    <field name="folio_venta" readonly="True"/>
+                                    <field name="cliente_report" readonly="True"/>
+                                    <field name="fecha_venta_r" readonly="True"/>
+                                    <field name="estatus_r" readonly="True"/>
+                                    <field name="producto_venta" readonly="True"/>
+                                    <field name="clave_pro_report" readonly="True"/>
+                                    <field name="total_report" readonly="True"/>
+                                </tree>
+                            </field>
+                            <field name="total_ventas" readonly="True"/>
+                            <field name="total_credito" readonly="True"/>
+                            <field name="total_abonos" readonly="True"/>
+                            <field name="saldo_faltante" readonly="True"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACTION PARA lafox.reporte.cliente -->
+
+        <record id="action_lafox_reporte_cliente" model="ir.actions.act_window">
+          <field name="name">Reporte</field>
+          <field name="res_model">lafox.reporte.cliente</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="lafox_reporte_cliente_form"/>
+          <field name="target">new</field>
+          <field name="context">{'cliente':True}</field>
+          <field name="help">La Fox</field>
+        </record>
+
+
+       <!--MENUS LA FOX -->
+       <!-- NIVEL 1 CABECERA -->
+        <menuitem id="main_ventas_menu" name="Ventas"/>
+
+            <!-- NIVEL 2 ENCABEZADOS -->
+            <menuitem id="menu_ventas" name="Facturación y Ventas" parent="main_ventas_menu" sequence="1"/>
+            <menuitem id="menu_corte_caja" name="Corte Caja" parent="main_ventas_menu" sequence="2"/>
+            <menuitem id="menu_tipo_cambio" name="Reportes" parent="main_ventas_menu" sequence="3"/>
+
+                <!-- NIVEL 3 MENUS ACCIONES -->
+                <menuitem action="action_la_fox_venta" id="submenu_venta" parent="menu_ventas" name="Ventas y Facturación Esp" sequence="1"/>
+                <menuitem action="action_venta_form_no_edit_price" id="submenu_venta_no_edit" parent="menu_ventas" name="Ventas y Facturación" sequence="2"/>
+                <menuitem action="action_la_fox_seg_pedido" id="submenu_seguimiento_pedido" parent="menu_ventas" name="Seguimiento pedido" sequence="3"/>
+                <menuitem action="action_lafox_abonos" id="submenu_abonos" parent="menu_ventas" name="Abono Cliente" sequence="4"/>
+                <menuitem action="view_lafox_devolucion_credito_action" id="submenu_devolucion" parent="menu_ventas" name="Devoluciones" sequence="5"/>
+
+                <menuitem action="action_lafox_daily_cortez_report_all" id="submenu_corte_parcial" parent="menu_corte_caja" name="Corte Parcial" sequence="1"/>
+                <menuitem action="lafox_corte_z_action" id="submenu_corte_z" parent="menu_corte_caja" name="Corte Z" sequence="2"/>
+                <menuitem action="lafox_corte_z_action_report" id="submenu_report_corte_z" parent="menu_corte_caja" name="Reportes Corte Z" sequence="3"/>
+                
+
+                <!-- <menuitem action="view_lafox_change_type_action" id="submenu_tipo_cambio" parent="menu_tipo_cambio" name="Tipo de Cambio" sequence="1"/> -->
+                <menuitem action="action_lafox_reporte_cliente" id="reporte_cliente" parent="menu_tipo_cambio" name="Reporte Saldo Cliente" sequence="1"/>
+                <menuitem action="lafox_reporte_de_venta_action" id="submenu_reporte_venta" parent="menu_tipo_cambio" name="Reporte de Venta" sequence="2"/>
+
+
+
+
+    </data>
+</openerp>

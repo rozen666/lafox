@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice_line_DEV" language="groovy" pageWidth="416" pageHeight="85" columnWidth="396" leftMargin="10" rightMargin="10" topMargin="0" bottomMargin="0" isIgnorePagination="true">
+	<property name="ireport.zoom" value="7.581705427489489"/>
+	<property name="ireport.x" value="1892"/>
+	<property name="ireport.y" value="92"/>
+	<import value="net.sf.jasperreports.engine.util.JRImageLoader"/>
+	<parameter name="account_id" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{account_id}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/odoo/extra_addons/jasper_reports/custom_reports/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+      lafox_devolucion_account.account_id as d_id,
+      lafox_devolucion_account.description,
+      product_uom_qty as cantidad,
+      piezas_qty as piezas,
+      precio_mov,
+      precio_lst,
+      amount,
+      product_template.name as clave,
+      PR.c_t,
+      product_template.list_price,
+      PR.unidad_product,
+      lafox_grupo_de_precios.nomenclatura,
+      lafox_devolucion_account.price_unit_false,
+      round(lafox_devolucion_account.price_unit_false,2)
+
+FROM lafox_devolucion_account
+
+INNER JOIN product_product as PR ON lafox_devolucion_account.product_id = PR.id
+INNER JOIN product_template ON  PR.product_tmpl_id = product_template.id
+INNER JOIN lafox_grupo_de_precios ON PR.grupo_precios_id = lafox_grupo_de_precios.id
+
+WHERE lafox_devolucion_account.account_id = $P{account_id}
+
+ORDER BY lafox_devolucion_account.id]]>
+	</queryString>
+	<field name="d_id" class="java.lang.Integer"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Double"/>
+	<field name="piezas" class="java.lang.Double"/>
+	<field name="precio_mov" class="java.lang.Double"/>
+	<field name="precio_lst" class="java.lang.Double"/>
+	<field name="amount" class="java.lang.Double"/>
+	<field name="clave" class="java.lang.String"/>
+	<field name="c_t" class="java.lang.String"/>
+	<field name="list_price" class="java.math.BigDecimal"/>
+	<field name="unidad_product" class="java.lang.String"/>
+	<field name="nomenclatura" class="java.lang.String"/>
+	<field name="price_unit_false" class="java.math.BigDecimal"/>
+	<field name="round" class="java.math.BigDecimal"/>
+	<variable name="amount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="17">
+			<rectangle>
+				<reportElement x="0" y="0" width="396" height="16" forecolor="#FDC193" backcolor="#FDC193"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="234" y="7" width="53" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio Lista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="7" width="48" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="7" width="40" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="396" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[      D E V O L U C I O N]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="7" width="38" height="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="7" width="31" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="7" width="37" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10">
+			<textField>
+				<reportElement x="1" y="4" width="19" height="6"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="208" y="1" width="62" height="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{precio_mov}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="198" y="1" width="22" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{unidad_product}=="HILO"?"HL": $F{unidad_product}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="275" y="1" width="29" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomenclatura}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="349" y="0" width="47" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="1" width="36" height="9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{clave}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement x="175" y="1" width="22" height="9">
+					<printWhenExpression><![CDATA[$F{cantidad} ==0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{piezas}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="55" y="1" width="120" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement x="160" y="1" width="37" height="9">
+					<printWhenExpression><![CDATA[$F{cantidad} != 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="32" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="287" y="1" width="47" height="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{price_unit_false}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="13">
+			<line>
+				<reportElement x="0" y="0" width="394" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="16" y="1" width="72" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Devolución]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="319" y="1" width="75" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{amount_1}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="149" y="1" width="200" height="9"/>
+				<subreportParameter name="suma_id">
+					<subreportParameterExpression><![CDATA[$F{d_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreporte_sumas_dev.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

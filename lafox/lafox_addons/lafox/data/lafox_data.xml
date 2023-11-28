@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="False">
+    	<!-- <record id="grupo_de_precios_sin_grupo" model="lafox.grupo.de.precios">
+            <field name="name">SIN GRUPO</field>
+            <field name="nomenclatura">-</field>
+            <field name="descuento">0.0</field>
+            <field name="description">NO TIENE NINGUNA AFECTACION APLICAN TODOS LOS DESCUENTOS DE LA ESCALA.</field>
+        </record> -->
+        <record id="location_sell_virtual" model="stock.location">
+            <field name="name">VIRTUAL LOCATIONS / VENTAS</field>
+            <field name="location_id">11</field>
+        </record>
+        <record id="location_terminado_virtual" model="stock.location">
+            <field name="name">LOCAL PRODUCTOS TERMINADO</field>
+            <field name="location_id">11</field>
+        </record>
+        <record id="location_accesorios_virtual" model="stock.location">
+            <field name="name">LOCAL PRODUCTOS ACCESORIOS</field>
+            <field name="location_id">11</field>
+        </record>
+        <record id="location_crudo_virtual" model="stock.location">
+            <field name="name">VIRTUAL LOCATIONS / CRUDOS</field>
+            <field name="location_id">11</field>
+        </record>
+        <record id="location_devolucion_virtual" model="stock.location">
+            <field name="name">VIRTUAL LOCATIONS / DEVOLUCIONES</field>
+            <field name="location_id">11</field>
+        </record>
+         <record id="location_fabrica_virtual" model="stock.location">
+            <field name="name">VIRTUAL LOCATIONS / DEVOLUCIONES-FABRICA</field>
+            <field name="location_id">11</field>
+        </record>
+
+        <record id="cron_can_view_corte_z" model="lafox.valida.estatus.boton">
+            <field name="estatus"></field>
+            <field name="fecha"></field>
+        </record>
+
+        <!-- RECORDS PARA GRUPO DE PRECIOS -->
+        <record id="grupo_precio_1" model="lafox.grupo.de.precios">
+            <field name="name">SIN GRUPO</field>
+            <field name="nomenclatura">-</field>
+            <field name="descuento">0</field>
+            <field name="description">NO TIENE NINGUNA AFECTACION APLICAN TODOS LOS DESCUENTOS DE LA ESCALA.</field>
+        </record>
+        <record id="grupo_precio_2" model="lafox.grupo.de.precios">
+            <field name="name">ESPECIAL</field>
+            <field name="nomenclatura">E</field>
+            <field name="descuento">50</field>
+            <field name="description">PARA TODOS LOS ARTICULOS QUE SE LES ASIGNE ESTE GRUPO, SOLO SE LE APLICARAN DESCUENTOS ADICONALES POR QUE SU AFECTGACION YA INCLUYE EL 50%</field>
+        </record>
+        <record id="grupo_precio_3" model="lafox.grupo.de.precios">
+            <field name="name">NETO</field>
+            <field name="nomenclatura">N</field>
+            <field name="descuento">0</field>
+            <field name="description">SE DETERMINA UN PRECIO FIJO PARA CUALQUIER PRODUCTO, NO APLICA NINGUN DESCUENTO.</field>
+        </record>
+        <!-- <record id="grupo_precio_4" model="lafox.grupo.de.precios">
+            <field name="name">DIJE GRUPO 19</field>
+            <field name="nomenclatura">19</field>
+            <field name="descuento">15</field>
+            <field name="description">SU AFECTACION ES UN 15% DE DESCUENTO SOBRE PRECIO BASE</field>
+        </record>
+        <record id="grupo_precio_5" model="lafox.grupo.de.precios">
+            <field name="name">ARETE</field>
+            <field name="nomenclatura">20</field>
+            <field name="descuento">10</field>
+            <field name="description">SU AFECTACION ES UN 10% DE DESCUENTO SOBRE PRECIO BASE</field>
+        </record> -->
+        <record id="grupo_precio_6" model="lafox.grupo.de.precios">
+            <field name="name">GRUPO 15</field>
+            <field name="nomenclatura">15</field>
+            <field name="descuento">15</field>
+            <field name="description">SU AFECTACION ES UN 15% DE DESCUENTO SOBRE PRECIO BASE</field>
+        </record>
+        <record id="grupo_precio_7" model="lafox.grupo.de.precios">
+            <field name="name">GRUPO 20</field>
+            <field name="nomenclatura">20</field>
+            <field name="descuento">20</field>
+            <field name="description">SU AFECTACION ES UN 20% DE DESCUENTO ADICIONAL</field>
+        </record>
+
+        <!-- RECORDS PARA GRUPO DE DESCUENTOS -->
+        <record id="grupo_escala_uno" model="lafox.escala.de.descuentos">
+            <field name="escala">*</field>
+            <field name="descuentos">MENUDEO 100%</field>
+            <field name="factor">1</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_dos" model="lafox.escala.de.descuentos">
+            <field name="escala">0</field>
+            <field name="descuentos">50%</field>
+            <field name="factor">0.500</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_02" model="lafox.escala.de.descuentos">
+            <field name="escala">1</field>
+            <field name="descuentos">50% + 10%</field>
+            <field name="factor">0.450</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_03" model="lafox.escala.de.descuentos">
+            <field name="escala">2</field>
+            <field name="descuentos">50% + 15%</field>
+            <field name="factor">0.425</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_04" model="lafox.escala.de.descuentos">
+            <field name="escala">3</field>
+            <field name="descuentos">50% + 20%</field>
+            <field name="factor">0.400</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_05" model="lafox.escala.de.descuentos">
+            <field name="escala">4</field>
+            <field name="descuentos">50% + 25%</field>
+            <field name="factor">0.375</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_6" model="lafox.escala.de.descuentos">
+            <field name="escala">5</field>
+            <field name="descuentos">50% + 30%</field>
+            <field name="factor">0.350</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_7" model="lafox.escala.de.descuentos">
+            <field name="escala">6</field>
+            <field name="descuentos">50% + 35%</field>
+            <field name="factor">0.325</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_8" model="lafox.escala.de.descuentos">
+            <field name="escala">7</field>
+            <field name="descuentos">50% + 40%</field>
+            <field name="factor">0.300</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_9" model="lafox.escala.de.descuentos">
+            <field name="escala">8</field>
+            <field name="descuentos">50% + 40% + 5%</field>
+            <field name="factor">0.285</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_10" model="lafox.escala.de.descuentos">
+            <field name="escala">9</field>
+            <field name="descuentos">50% + 40% +10% + 10%</field>
+            <field name="factor">0.243</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_t" model="lafox.escala.de.descuentos">
+            <field name="escala">T</field>
+            <field name="descuentos">50% + 40% +10%</field>
+            <field name="factor">0.270</field>
+            <field name="tipo_escala">1</field>
+        </record>
+
+        <record id="grupo_escala_a_0" model="lafox.escala.de.descuentos">
+            <field name="escala">*</field>
+            <field name="descuentos">MENUDEO</field>
+            <field name="factor">2</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_1" model="lafox.escala.de.descuentos">
+            <field name="escala">1</field>
+            <field name="descuentos">10%</field>
+            <field name="factor">1.800</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_2" model="lafox.escala.de.descuentos">
+            <field name="escala">2</field>
+            <field name="descuentos">15%</field>
+            <field name="factor">1.700</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_3" model="lafox.escala.de.descuentos">
+            <field name="escala">3</field>
+            <field name="descuentos">20%</field>
+            <field name="factor">1.600</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_4" model="lafox.escala.de.descuentos">
+            <field name="escala">4</field>
+            <field name="descuentos">25%</field>
+            <field name="factor">1.500</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_5" model="lafox.escala.de.descuentos">
+            <field name="escala">5</field>
+            <field name="descuentos">30%</field>
+            <field name="factor">1.400</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_6" model="lafox.escala.de.descuentos">
+            <field name="escala">6</field>
+            <field name="descuentos">50%</field>
+            <field name="factor">1.000</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_7" model="lafox.escala.de.descuentos">
+            <field name="escala">A</field>
+            <field name="descuentos">50% + 10%</field>
+            <field name="factor">0.900</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_8" model="lafox.escala.de.descuentos">
+            <field name="escala">B</field>
+            <field name="descuentos">50% + 15%</field>
+            <field name="factor">0.850</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_9" model="lafox.escala.de.descuentos">
+            <field name="escala">C</field>
+            <field name="descuentos">50% + 20%</field>
+            <field name="factor">0.800</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_D" model="lafox.escala.de.descuentos">
+            <field name="escala">D</field>
+            <field name="descuentos">50% + 25%</field>
+            <field name="factor">0.750</field>
+            <field name="tipo_escala">0</field>
+        </record>
+        <record id="grupo_escala_a_e" model="lafox.escala.de.descuentos">
+            <field name="escala">E</field>
+            <field name="descuentos">50% + 30%</field>
+            <field name="factor">0.700</field>
+            <field name="tipo_escala">0</field>
+        </record>
+         <record id="grupo_escala_a_x" model="lafox.escala.de.descuentos">
+            <field name="escala">x</field>
+            <field name="descuentos">50% + 40%</field>
+            <field name="factor">0.600</field>
+            <field name="tipo_escala">0</field>
+        </record>
+<!-- RECORDS PARA GRUPO DE DESCUENTOS ESPECIALES -->
+        <record id="grupo_escala_0" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF1 ESCALA *</field>
+            <field name="descuentos">MENUDEO 100%</field>
+            <field name="factor">1</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_1" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF1 ESCALA 0 - 1 *</field>
+            <field name="descuentos">0 Y 1</field>
+            <field name="factor">0.500</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_2" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF1 ESCALA 0 - 2</field>
+            <field name="descuentos">2 Y 3</field>
+            <field name="factor">0.415</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_3" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF1 ESCALA 4 -5 - 6</field>
+            <field name="descuentos">4,5 Y 6</field>
+            <field name="factor">0.342</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_4" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF1 ESCALA 7 - 8</field>
+            <field name="descuentos"> Y 8</field>
+            <field name="factor">.281</field>
+            <field name="tipo_escala">1</field>
+        </record>
+        <record id="grupo_escala_5" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF1 ESCALA T</field>
+            <field name="descuentos">LT</field>
+            <field name="factor">.232</field>
+            <field name="tipo_escala">1</field>
+        </record>
+
+        <record id="grupo_escala_00" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF2 ESCALA *</field>
+            <field name="descuentos">*</field>
+            <field name="factor">1</field>
+            <field name="tipo_escala">2</field>
+        </record>
+        <record id="grupo_escala_11" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF2 ESCALA 0 - 1</field>
+            <field name="descuentos">0 Y 1</field>
+            <field name="factor">0.500</field>
+            <field name="tipo_escala">2</field>
+        </record>
+        <record id="grupo_escala_22" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF2 ESCALA 2 - 3</field>
+            <field name="descuentos">2 Y 3</field>
+            <field name="factor">0.421</field>
+            <field name="tipo_escala">2</field>
+        </record>
+        <record id="grupo_escala_33" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF2 ESCALA 4 - 5 - 6</field>
+            <field name="descuentos">4, 5 Y 6</field>
+            <field name="factor">0.350</field>
+            <field name="tipo_escala">2</field>
+        </record>
+        <record id="grupo_escala_44" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF2 ESCALA  7 - 8</field>
+            <field name="descuentos">7 Y 9</field>
+            <field name="factor">0.290</field>
+            <field name="tipo_escala">2</field>
+        </record>
+        <record id="grupo_escala_54" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF2 ESCALA T</field>
+            <field name="descuentos">LT</field>
+            <field name="factor">0.240</field>
+            <field name="tipo_escala">2</field>
+        </record>
+
+        <!-- ESCALA CF3 -->
+        <record id="grupo_escala_300" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF3 ESCALA *</field>
+            <field name="descuentos">*</field>
+            <field name="factor">1</field>
+            <field name="tipo_escala">3</field>
+        </record>
+        <record id="grupo_escala_311" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF3 ESCALA 0 - 1</field>
+            <field name="descuentos">0 Y 1</field>
+            <field name="factor">0.500</field>
+            <field name="tipo_escala">3</field>
+        </record>
+        <record id="grupo_escala_322" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF3 ESCALA 2 - 3</field>
+            <field name="descuentos">2 Y 3</field>
+            <field name="factor">0.415</field>
+            <field name="tipo_escala">3</field>
+        </record>
+        <record id="grupo_escala_333" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF3 ESCALA 4 - 5 - 6</field>
+            <field name="descuentos">4, 5 Y 6</field>
+            <field name="factor">0.342</field>
+            <field name="tipo_escala">3</field>
+        </record>
+        <record id="grupo_escala_344" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF3 ESCALA  7 - 8</field>
+            <field name="descuentos">7 Y 9</field>
+            <field name="factor">0.283</field>
+            <field name="tipo_escala">3</field>
+        </record>
+        <record id="grupo_escala_354" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CF3 ESCALA T</field>
+            <field name="descuentos">LT</field>
+            <field name="factor">0.237</field>
+            <field name="tipo_escala">3</field>
+        </record>
+        <!-- ESCALA CF -->
+        <record id="grupo_escala_300M" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CMF ESCALA *</field>
+            <field name="descuentos">*</field>
+            <field name="factor">1</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_311M" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CMF ESCALA 0 - 1</field>
+            <field name="descuentos">0 Y 1</field>
+            <field name="factor">0.500</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_322M" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CMF ESCALA 2 - 3</field>
+            <field name="descuentos">2 Y 3</field>
+            <field name="factor">0.425</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_333M" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CMF ESCALA 4 - 5 - 6</field>
+            <field name="descuentos">4, 5 Y 6</field>
+            <field name="factor">0.350</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_344M" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CMF ESCALA  7 - 8</field>
+            <field name="descuentos">7 Y 9</field>
+            <field name="factor">0.300</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_354M" model="lafox.grupo.de.precios.esp">
+            <field name="escala">CMF ESCALA T</field>
+            <field name="descuentos">LT</field>
+            <field name="factor">0.250</field>
+            <field name="tipo_escala">4</field>
+        </record>
+
+        <record id="grupo_escala_e1" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50%</field>
+            <field name="descuentos">50%</field>
+            <field name="factor">1</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e2" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 10%</field>
+            <field name="descuentos">50% + 10%</field>
+            <field name="factor">.900</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e3" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 15%</field>
+            <field name="descuentos">50% + 15%</field>
+            <field name="factor">.850</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e4" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 20%</field>
+            <field name="descuentos">50% + 20%</field>
+            <field name="factor">.800</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e5" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 25%</field>
+            <field name="descuentos">50% + 25%</field>
+            <field name="factor">.750</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e6" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 30%</field>
+            <field name="descuentos">50% + 30%</field>
+            <field name="factor">.700</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e7" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 40% +10%</field>
+            <field name="descuentos">50% + 40% +10%</field>
+            <field name="factor">0.540</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e8" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 35%</field>
+            <field name="descuentos">50% + 35%</field>
+            <field name="factor">.650</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e9" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 40%</field>
+            <field name="descuentos">50% + 40%</field>
+            <field name="factor">.600</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e10" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 40% + 5%</field>
+            <field name="descuentos">50% + 40% + 5%</field>
+            <field name="factor">.570</field>
+            <field name="tipo_escala">4</field>
+        </record>
+        <record id="grupo_escala_e11" model="lafox.grupo.de.precios.esp">
+            <field name="escala">50% + 40% +10% + 10%</field>
+            <field name="descuentos">50% + 40% +10% + 10%</field>
+            <field name="factor">.486</field>
+            <field name="tipo_escala">4</field>
+        </record>
+
+        <!-- CREACION DE REGISTROS PARA HORARIOS DE OFICINA/FABRICA -->
+        <record id="regla_asistencia_oficina" model="lafox.regla.asistencia.oficina">
+            <field name="lugar_trabajo">Oficina</field>
+            <field name="hora_entrada">10:00:00</field>
+            <field name="retardo_suave">10:11:00</field>
+            <field name="retardo_duro">10:21:00</field>
+            <field name="desayuno">N/A</field>
+            <field name="desayuno_retardo">N/A</field>
+            <field name="comida">N/A</field>
+            <field name="comida_retardo">N/A</field>
+            <field name="salida">20:00:00</field>
+        </record>
+
+        <record id="regla_asistencia_oficinafam" model="lafox.regla.asistencia.oficina">
+            <field name="lugar_trabajo">OficinaFam</field>
+            <field name="hora_entrada">10:30:00</field>
+            <field name="retardo_suave">10:46:00</field>
+            <field name="retardo_duro">11:01:00</field>
+            <field name="desayuno">N/A</field>
+            <field name="desayuno_retardo">N/A</field>
+            <field name="comida">N/A</field>
+            <field name="comida_retardo">N/A</field>
+            <field name="salida">20:00:00</field>
+        </record>
+
+        <record id="regla_asistencia_fabrica_fam" model="lafox.regla.asistencia.oficina">
+            <field name="lugar_trabajo">FabricaFam</field>
+            <field name="hora_entrada">08:30:00</field>
+            <field name="retardo_suave">08:46:00</field>
+            <field name="retardo_duro">09:01:00</field>
+            <field name="desayuno">N/A</field>
+            <field name="desayuno_retardo">N/A</field>
+            <field name="comida">N/A</field>
+            <field name="comida_retardo">N/A</field>
+            <field name="salida">18:30:00</field>
+        </record>
+
+        <record id="regla_asistencia_fabrica" model="lafox.regla.asistencia.oficina">
+            <field name="lugar_trabajo">Fabrica</field>
+            <field name="hora_entrada">08:00:00</field>
+            <field name="retardo_suave">08:01:00</field>
+            <field name="retardo_duro">08:10:00</field>
+            <field name="desayuno">10:00:00</field>
+            <field name="desayuno_retardo">10:18:00</field>
+            <field name="comida">14:00:00</field>
+            <field name="comida_retardo">14:48:00</field>
+            <field name="salida">18:30:00</field>
+        </record>
+
+
+   	</data>
+</openerp>

@@ -1,0 +1,799 @@
+43   [invoice_line subreport filler] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 1749079285: exception
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+204  [XML-RPC-0] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 506472034: exception
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+204  [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+Caused by:
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+84039 [invoice_line subreport filler] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 617392897: exception
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+84039 [XML-RPC-0] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 735922399: exception
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+84040 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+Caused by:
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+103930 [invoice_line subreport filler] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 2104463516: exception
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+103931 [XML-RPC-0] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 575299365: exception
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+103931 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+Caused by:
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: account_invoice = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 407
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+289407 [invoice_line subreport filler] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 2140455821: exception
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: integer = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 410
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+289506 [XML-RPC-0] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 1938308921: exception
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: integer = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 410
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+289507 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: integer = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 410
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+Caused by:
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Error executing SQL statement for : subreporte_sumas
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:169)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:684)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:605)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: integer = character varying
+  Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+  Position: 410
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2062)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1795)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:163)
+	... 9 more
+745857 [invoice_line subreport filler] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 57907752: exception
+net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+745930 [XML-RPC-0] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 1703666770: exception
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+745953 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by:
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+1706533 [invoice_line subreport filler] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 996139033: exception
+net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+1706580 [XML-RPC-0] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 1082625396: exception
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+1706582 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by:
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+1888984 [invoice_line subreport filler] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 2025860813: exception
+net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+1889012 [XML-RPC-0] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport - Fill 1677535960: exception
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+1889042 [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+org.apache.xmlrpc.common.XmlRpcInvocationException: Failed to invoke method execute in class com.nantic.jasperreports.JasperServer: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.invoke(ReflectiveXmlRpcHandler.java:129)
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:106)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+Caused by: net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more
+Caused by:
+net.sf.jasperreports.engine.JRRuntimeException: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.prepare(JRFillSubreport.java:711)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:329)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:419)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:378)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummaryNoLastFooterSamePage(JRVerticalFiller.java:1074)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillSummary(JRVerticalFiller.java:1037)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportEnd(JRVerticalFiller.java:301)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:135)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:946)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:609)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: net.sf.jasperreports.engine.JRException: Incompatible java.lang.Integer value assigned to parameter suma_id in the subreporte_sumas dataset.
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameter(JRFillDataset.java:903)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setFillParameterValues(JRFillDataset.java:642)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setParameterValues(JRFillDataset.java:585)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1280)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:901)
+	... 5 more

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreporte_credito" language="groovy" pageWidth="405" pageHeight="800" columnWidth="345" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.7715610000000015"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="35"/>
+	<parameter name="IDS" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{IDS}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+      account_invoice.id as ac_id,
+      account_invoice.amount_total,
+      account_invoice.fecha_venta,
+      account_invoice.tipo_producto,
+      account_invoice.nomenclatura,
+      account_invoice.comentarios,
+      total_con_letra,
+      RP.name as name_vendedor,
+      RC.name as name_cliente,
+      RC.street ||' '|| RC.street2 as direccion,
+      RC.city || ' ' || RS.name || ' ' || RC.zip as ciudad,
+      RC.phone || ' ' || RC.mobile || ' ' || RC.fax as phones,
+      res_country.name as pais,
+      price_dolar,
+      amount_untaxed as subtotal,
+      amount_tax as iva,
+      total_dev,
+      check_credito,
+      SUBSTRING(esca_cliente, 0,2) AS lp,
+      RC.clave_cliente,
+      RC.moneda_valores
+
+FROM account_invoice
+
+INNER JOIN res_users ON account_invoice.user_id = res_users.id
+INNER JOIN res_partner as RP ON res_users.partner_id = RP.id
+INNER JOIN res_partner as RC ON account_invoice.partner_id = RC.id
+INNER JOIN res_country ON RC.country_id = res_country.id
+INNER JOIN res_country_state as RS ON RC.state_id = RS.id
+INNER JOIN lafox_change_monetary ON 1 = lafox_change_monetary.id
+
+WHERE account_invoice.id = $P{IDS}]]>
+	</queryString>
+	<field name="ac_id" class="java.lang.Integer"/>
+	<field name="amount_total" class="java.math.BigDecimal"/>
+	<field name="fecha_venta" class="java.sql.Timestamp"/>
+	<field name="tipo_producto" class="java.lang.String"/>
+	<field name="nomenclatura" class="java.lang.String"/>
+	<field name="comentarios" class="java.lang.String"/>
+	<field name="total_con_letra" class="java.lang.String"/>
+	<field name="name_vendedor" class="java.lang.String"/>
+	<field name="name_cliente" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<field name="phones" class="java.lang.String"/>
+	<field name="pais" class="java.lang.String"/>
+	<field name="price_dolar" class="java.lang.Double"/>
+	<field name="subtotal" class="java.math.BigDecimal"/>
+	<field name="iva" class="java.math.BigDecimal"/>
+	<field name="total_dev" class="java.lang.Double"/>
+	<field name="check_credito" class="java.lang.Boolean"/>
+	<field name="lp" class="java.lang.String"/>
+	<field name="clave_cliente" class="java.lang.String"/>
+	<field name="moneda_valores" class="java.lang.String"/>
+	<detail>
+		<band height="165" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="117" width="288" height="1" forecolor="#737373"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="1" y="59" width="306" height="38"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[EN LA CIUDAD DE MEXICO, D.F. O EN CUALQUIER LUGAR QUE ME SEA REQUERIDO EL PAGO CAUSANDO UN INTERES MENSUAL DE __% EN CASO DE NO SER PAGADO SU SU TOTALIDAD AL VENCIMIENTO Y DURANTE EL PERIODO QUE EXISTA CUALQUIER SALDO PENDIENTE DE PAGO EN EL CASO DE QUE EL COBRO SEA DE LA NATURALEZA JUDICIAL AEPTO LOS GASTOS QUE ESTE ORIGINE.
+LA MERCANCIA DESCRITA EN ESTE DOCUMENTO SE RECIBE A MI ENTERA SATISFACCION EN CALIDAD DE PRESTAMO MERCANTIL, POR LO QUE ACEPTO TODA LA RESPONSABILIDAD POR CUALQUIER PERDIDA O DAÑO, YA SEA PARCIAL O TOTAL. SOLO SE CONSIDERA QUE LA MERCANCIA HA SIDO VENDIDA CUANDO SE RECIVA LA FACTURA CORRESPONDIENTE Y SE HAYA REALIZADO EL PAGO TOTAL.
+]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="39" y="107" width="223" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{name_cliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="41" y="34" width="40" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{amount_total}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="94" y="34" width="150" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{total_con_letra}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="120" y="126" width="169" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ciudad}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="81" y="118" width="206" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="12" width="290" height="22"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[	POR MEDIO DEL PRESENRTE PAGARE RECONOZCO DEBER Y ME OBLIGO A PAGAR INCONDICIONALMENTE A LA ORDEN DE :____________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="49" width="25" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[EL DIA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="147" width="55" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[FIRMA(S):]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="175" y="134" width="114" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{phones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="34" width="55" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[LA CANTIDAD DE :]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="26" y="49" width="68" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha_venta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

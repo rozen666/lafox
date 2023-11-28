@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+    	<!-- Cron job para el registro de ventas de account invoice-->
+        <record forcecreate="True" id="ir_cron_execute_producto_ventas" model="ir.cron">
+            <field name="name">Venta de Productos</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall" />
+            <field eval="'product.product'" name="model" />
+            <field eval="'_cron_execute_ventas'" name="function" />
+            <field eval="''" name="args" />
+        </record>
+
+        <!-- Cron job para la cantidad de ventas de product_product-->
+       <!--      <record forcecreate="True" id="ir_cron_execute_qty_ventas" model="ir.cron">
+                <field name="name">Cantidad vendida de Productos</field>
+                <field eval="True" name="active" />
+                <field name="user_id" ref="base.user_root"/>
+                <field name="interval_number">1</field>
+                <field name="interval_type">minutes</field>
+                <field name="numbercall">-1</field>
+                <field eval="False" name="doall" />
+                <field eval="'product.product'" name="model" />
+                <field eval="'_cron_excute_qty_venta'" name="function" />
+                <field eval="''" name="args" />
+            </record> -->
+
+        <!-- Cron job para la comparacion de cantidad minima en product.product y stock.quant -->
+        <record forcecreate="True" id="envio_mail_cantidad_minima_products" model="ir.cron">
+            <field name="name">Alerta de correo para la cantidad_minima de Productos</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall" />
+            <field eval="'product.product'" name="model" />
+            <field eval="'envio_mail_cantidad_minima_products'" name="function" />
+            <field eval="''" name="args" />
+        </record>
+
+        <!-- Cron job para poder cambiar el status de Ejecucion venta al finalizar el CORTE Z -->
+        <record forcecreate="True" id="lafox_view_corte_z" model="ir.cron">
+            <field name="name">Cambio de estatus al dia de (action_paid_venta)</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall" />
+            <field eval="'lafox.valida.estatus.boton'" name="model" />
+            <field eval="'_can_view_corte_z'" name="function" />
+            <field eval="''" name="args" />
+        </record>
+
+        <!-- Cron job para poder actualizar los promedios de venta por cliente -->
+        <!-- <record forcecreate="True" id="ir_cron_execute_qty_ventas_por_cliente" model="ir.cron">
+            <field name="name">Cantidad vendida por clientes</field>
+            <field eval="True" name="active" />
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall" />
+            <field eval="'res.partner'" name="model" />
+            <field eval="'_cron_execute_ventas_por_cliente'" name="function" />
+            <field eval="''" name="args" />
+        </record>        --> 
+
+    </data>
+</openerp>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         <record id="base.menu_reporting" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <record id="base.menu_administration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <record id="account.menu_finance" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <record id="base.menu_base_partner" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <record id="stock.menu_stock_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <record id="hr.menu_hr_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <!-- MOSTRAR U OCULTAR VISTA POR USUSARIOS -->
+        <record model="ir.ui.menu" id="mail.mail_my_stuff">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_publ_disenio'),ref('group_lafox_ventas'),ref('group_lafox_almacen'),ref('group_lafox_sist'),ref('group_lafox_rec_fact')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="mail.mail_feeds_main">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_publ_disenio'),ref('group_lafox_ventas'),ref('group_lafox_almacen'),ref('group_lafox_sist'),ref('group_lafox_rec_fact')])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="base.menu_administration">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+         <record model="ir.ui.menu" id="mail.mail_group_root">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+         <record model="ir.ui.menu" id="mail.mail_tomefeeds">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="mail.mail_inboxfeeds">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_publ_disenio'),ref('group_lafox_ventas'),ref('group_lafox_almacen'),ref('group_lafox_sist'),ref('group_lafox_rec_fact')])]"/>
+        </record>
+
+        <!-- VISTAS DEL MENU CONFIGURACIÓN -->
+        
+        <record model="ir.ui.menu" id="menu_config">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="main_config_menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_cont_fin'),ref('group_lafox_cred_cob'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_employee">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_descuetos">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_employee_asisstence">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_cont_fin'),ref('group_lafox_cred_cob'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_confg">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_confg_2">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_sist')])]"/>
+        </record>
+
+        <!-- VISTAS DEL MENU OPERACIONES -->
+
+        <record model="ir.ui.menu" id="main_operaciones_menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_publ_disenio'),ref('group_lafox_ventas'),ref('group_lafox_cont_fin'),ref('group_lafox_cred_cob'),ref('group_lafox_almacen'),ref('group_lafox_aux_gral'),ref('group_lafox_aux_gral'),ref('group_lafox_rec_fact'),ref('group_lafox_sist')])]"/>
+        </record>
+<!--         <record model="ir.ui.menu" id="submenu_movimientos_suc">
+            <field name="groups_id" eval="[(6, 0, [])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_movimientos_suc_confirm">
+            <field name="groups_id" eval="[(6, 0, [])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_movimientos_suc">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_almacen'),ref('group_lafox_aux_gral'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_movimientos_suc_confirm">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_sist')])]"/>
+        </record>   -->      
+        <record model="ir.ui.menu" id="menu_operaciones_almacen">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_ventas'),ref('group_lafox_almacen'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_almacen">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_ventas'),ref('group_lafox_almacen'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_ubicacion_suc">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_ventas'),ref('group_lafox_almacen'),ref('group_lafox_aux_gral'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_productos">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_publ_disenio'),ref('group_lafox_ventas'),ref('group_lafox_almacen'),ref('group_lafox_aux_gral'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="menu_operaciones_contacs">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_ventas'),ref('group_lafox_cont_fin'),ref('group_lafox_cred_cob'),ref('group_lafox_almacen'),ref('group_lafox_aux_gral'),ref('group_lafox_rec_fact'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_clientes">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_ventas'),ref('group_lafox_cont_fin'),ref('group_lafox_cred_cob'),ref('group_lafox_almacen'),ref('group_lafox_aux_gral'),ref('group_lafox_rec_fact'),ref('group_lafox_sist')])]"/>
+        </record>
+
+        <!-- VISTAS DEL MENU VENTAS -->
+
+        <record model="ir.ui.menu" id="main_ventas_menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_ventas'),ref('group_lafox_cont_fin'),ref('group_lafox_cred_cob'),ref('group_lafox_almacen'),ref('group_lafox_aux_gral'),ref('group_lafox_rec_fact'),ref('group_lafox_sist'),ref('group_lafox_ventas_2')])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="menu_ventas">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_cont_fin'),ref('group_lafox_cred_cob'),ref('group_lafox_almacen'),ref('group_lafox_aux_gral'),ref('group_lafox_rec_fact'),ref('group_lafox_sist'),ref('group_lafox_ventas_2'),ref('group_lafox_ventas')])]"/>
+        </record>
+         <record model="ir.ui.menu" id="submenu_venta">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_caja_tes'),ref('group_lafox_cont_fin'),ref('group_lafox_cred_cob'),ref('group_lafox_almacen'),ref('group_lafox_aux_gral'),ref('group_lafox_rec_fact'),ref('group_lafox_sist'),ref('group_lafox_ventas_2')])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="submenu_venta_no_edit">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_ventas'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="sub_lafox_cotizacion" >
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_sist')])]"/>
+        </record>
+        <record model="ir.ui.menu" id="submenu_devolucion" >
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one'),ref('group_lafox_admr'),ref('group_lafox_asis_cord'),ref('group_lafox_sist')])]"/>
+        </record>
+    </data>
+</openerp>

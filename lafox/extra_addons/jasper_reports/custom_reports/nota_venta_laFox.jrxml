@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota_venta_laFox" language="groovy" pageWidth="416" pageHeight="569" columnWidth="406" leftMargin="10" rightMargin="0" topMargin="9" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true">
+	<property name="ireport.zoom" value="2.196150000000008"/>
+	<property name="ireport.x" value="10"/>
+	<property name="ireport.y" value="395"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/kasabian/Documentos/Jasper Reports/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="IDS" class="java.lang.Object"/>
+	<parameter name="PIDS" class="java.util.List">
+		<defaultValueExpression><![CDATA[$P{IDS}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+      account_invoice.id as ac_id,
+      account_invoice.amount_total,
+      account_invoice.fecha_venta,
+      account_invoice.tipo_producto,
+      account_invoice.nomenclatura,
+      account_invoice.comentarios,
+      total_con_letra,
+      RP.name as name_vendedor,
+      RC.name as name_cliente,
+      RC.street as calle,
+      RC.num_exterior ||' '|| RC.num_interior as numeros,
+      RC.street2 || ' ' || upper(RS.name) || ' ' || RC.zip as ciudad,
+      RC.phone || ' ' || RC.mobile || ' ' || RC.fax as phones,
+      RC.phone as telefono,
+      RC.mobile as celular,
+      res_country.name as pais,
+      price_dolar,
+      amount_untaxed as subtotal,
+      amount_tax as iva,
+      total_dev,
+      check_credito,
+      SUBSTRING(esca_cliente, 0,2) AS lp,
+      RC.clave_cliente,
+      RC.moneda_valores,
+      RC.dias_credito
+
+FROM account_invoice
+
+INNER JOIN res_users ON account_invoice.user_id = res_users.id
+INNER JOIN res_partner as RP ON res_users.partner_id = RP.id
+INNER JOIN res_partner as RC ON account_invoice.partner_id = RC.id
+INNER JOIN res_country ON RC.country_id = res_country.id
+INNER JOIN res_country_state as RS ON RC.state_id = RS.id
+INNER JOIN lafox_change_monetary ON 1 = lafox_change_monetary.id
+
+
+WHERE $X{IN,account_invoice.id,PIDS}]]>
+	</queryString>
+	<field name="ac_id" class="java.lang.Integer"/>
+	<field name="amount_total" class="java.math.BigDecimal"/>
+	<field name="fecha_venta" class="java.sql.Timestamp"/>
+	<field name="tipo_producto" class="java.lang.String"/>
+	<field name="nomenclatura" class="java.lang.String"/>
+	<field name="comentarios" class="java.lang.String"/>
+	<field name="total_con_letra" class="java.lang.String"/>
+	<field name="name_vendedor" class="java.lang.String"/>
+	<field name="name_cliente" class="java.lang.String"/>
+	<field name="calle" class="java.lang.String"/>
+	<field name="numeros" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<field name="phones" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="celular" class="java.lang.String"/>
+	<field name="pais" class="java.lang.String"/>
+	<field name="price_dolar" class="java.lang.Double"/>
+	<field name="subtotal" class="java.math.BigDecimal"/>
+	<field name="iva" class="java.math.BigDecimal"/>
+	<field name="total_dev" class="java.lang.Double"/>
+	<field name="check_credito" class="java.lang.String"/>
+	<field name="lp" class="java.lang.String"/>
+	<field name="clave_cliente" class="java.lang.String"/>
+	<field name="moneda_valores" class="java.lang.String"/>
+	<field name="dias_credito" class="java.lang.String"/>
+	<title>
+		<band height="3" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="74">
+			<textField isBlankWhenNull="true">
+				<reportElement x="158" y="60" width="82" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_producto}=="0" ? "(ACCESORIOS)":$F{tipo_producto}=="1"?"(TERMINADO)": null]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="18" width="18" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[E.D.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="18" width="15" height="11"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[T.C]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="26" width="28" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Agente:]]></text>
+			</staticText>
+			<image hAlign="Left" vAlign="Bottom">
+				<reportElement positionType="FixRelativeToBottom" x="-8" y="-11" width="129" height="85"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="122" y="37" width="60" height="10"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{clave_cliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="248" y="26" width="27" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{price_dolar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="298" y="16" width="96" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomenclatura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="26" width="50" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{name_vendedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="26" width="34" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{lp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="364" y="8" width="16" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Hoja:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="167" y="38" width="226" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{name_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="8" width="76" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="120" y="35" width="273" height="1" forecolor="#737373"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="120" y="16" width="128" height="11"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Del. Cuauhtemoc, Ciudad de Mexico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="11" width="113" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Palma 31 4o Piso, Col Centro 06000]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="27" width="112" height="9"/>
+				<textElement verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(55) 5512-7614, 5518-2628]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="46" width="269" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{calle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="54" width="271" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ciudad}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="305" y="64" width="88" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="64" width="76" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{celular}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<subreport>
+				<reportElement x="-9" y="0" width="325" height="15"/>
+				<subreportParameter name="account_id">
+					<subreportParameterExpression><![CDATA[$F{ac_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_nota_venta.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="14">
+			<subreport>
+				<reportElement x="-9" y="0" width="325" height="14"/>
+				<subreportParameter name="account_id">
+					<subreportParameterExpression><![CDATA[$F{ac_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_devolucion.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="42">
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="17" y="18" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="139" y="18" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="142" y="1" width="28" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo-www-png-7.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="162" y="29" width="110" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventasterminado@lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="29" width="81" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventas@lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="8" width="51" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LaFoxJoyeria]]></text>
+			</staticText>
+			<image>
+				<reportElement x="17" y="1" width="25" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["Nuevo-logo-Facebook.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="158" y="8" width="67" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[www.lafox.com.mx]]></text>
+			</staticText>
+			<image>
+				<reportElement x="309" y="1" width="25" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["insta.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="330" y="8" width="49" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[@lafoxjoyeria]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="262" y="18" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="284" y="28" width="117" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[accesoriosventas@lafox.com.mx]]></text>
+			</staticText>
+			<line>
+				<reportElement x="17" y="-1" width="361" height="1" forecolor="#737373"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="52">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="18" y="1" width="353" height="6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{comentarios}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="17" y="27" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="139" y="27" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="142" y="10" width="28" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo-www-png-7.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="39" y="38" width="81" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventas@lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="17" width="51" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LaFoxJoyeria]]></text>
+			</staticText>
+			<image>
+				<reportElement x="17" y="10" width="25" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["Nuevo-logo-Facebook.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="158" y="17" width="67" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[www.lafox.com.mx]]></text>
+			</staticText>
+			<image>
+				<reportElement x="309" y="10" width="25" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["insta.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="330" y="17" width="49" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[@lafoxjoyeria]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="262" y="27" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="162" y="38" width="110" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventasterminado@lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="37" width="117" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[accesoriosventas@lafox.com.mx]]></text>
+			</staticText>
+			<line>
+				<reportElement x="18" y="7" width="361" height="1" forecolor="#737373"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="100">
+			<rectangle>
+				<reportElement x="0" y="47" width="394" height="19" forecolor="#FDC193" backcolor="#FDC193"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="161" y="10" width="232" height="18" forecolor="#FDC193" backcolor="#FDC193"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="158" y="10" width="90" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="47" width="64" height="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTE TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="47" width="47" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="55" width="165" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{total_con_letra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="325" y="47" width="66" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{amount_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="308" y="10" width="38" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SubTotal]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="325" y="10" width="67" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="185" y="19" width="127" height="9">
+					<printWhenExpression><![CDATA[$F{check_credito} == "t" ? "CREDITO":"EFECTIVO"]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{check_credito}== "t" ? "CREDITO":"EFECTIVO"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="231" y="21" width="28" height="9">
+					<printWhenExpression><![CDATA[$F{check_credito} == "t"]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dias_credito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="261" y="21" width="28" height="9">
+					<printWhenExpression><![CDATA[$F{check_credito} == "t"]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="19" width="62" height="9">
+					<printWhenExpression><![CDATA[$F{total_dev} != 0.0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEVOLUCIONES]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="327" y="19" width="65" height="11">
+					<printWhenExpression><![CDATA[$F{total_dev} != 0.0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_dev}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="182" y="10" width="127" height="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{moneda_valores}=="P" ? "Pesos":"Dolares"]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="-4" y="82" width="325" height="15">
+					<printWhenExpression><![CDATA[$F{check_credito} == "t"]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="IDS">
+					<subreportParameterExpression><![CDATA[$F{ac_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreporte_credito.jasper"]]></subreportExpression>
+			</subreport>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="78" width="394" height="19" forecolor="#FDC193" backcolor="#EEEEEE"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="82" width="393" height="15"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*LE RECORDAMOS QUE PARA DEVOLUCIONES DE MERCANCIA EN PRODUCTO TERMINADO, SE RECIBIRA HASTA EL 30% SOBRE SU COMPRA, EN ACCESORIOS NO HAY DEVOLUCIONES]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

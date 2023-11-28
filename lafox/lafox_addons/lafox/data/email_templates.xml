@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="0">
+    	<record id="template_email_cantidad_minima_producto" model="email.template">
+            <field name="name">Información ¡IMPORTANTE!</field>
+            <field name="model_id" ref="stock.model_product_template"/>
+            <field name="email_from"><![CDATA[ ${ctx['nombre_from']} <${ctx['correo_from']}>  ]]></field>
+            <field name="email_to"> ${ctx['receptor_email']} </field>
+
+            <field name="subject"><![CDATA[Información ¡IMPORTANTE!]]></field>
+            <field name="body_html">
+                <![CDATA[
+                	<h3>Información ¡IMPORTANTE!</h3>
+                	<p>
+                   		Hola, !Buen día¡ le hacemos llegar la información respecto a la cantidad minima de su producto,
+                      <br> ${ctx['producto_info']}. lo que requiere prevención para su proceso,
+                      <br> misma que fue realizada con la fecha: ${ctx['fecha_cotizacion']}.
+
+                      <br>¡Excelente día!.
+                      <br><p><strong>LaFox</strong></p>
+                	</p>
+
+                ]]>
+            </field>
+        </record>
+
+
+      <record id="template_email_cancelado" model="email.template">
+        <field name="name">Informacion ¡IMPORTANTE!</field>
+        <field name="model_id" ref="stock.model_product_template"/>
+        <field name="email_from"><![CDATA[ ${ctx['nombre_from']} <${ctx['correo_from']}>  ]]></field>
+        <field name="email_to"> ${ctx['receptor_email']} </field>
+
+        <field name="subject"><![CDATA[Información ¡IMPORTANTE!]]></field>
+        <field name="body_html">
+          <![CDATA[
+                  <h3>Información ¡IMPORTANTE!</h3>
+                  <p>
+                      Hola, !Buen día¡ le hacemos llegar la información respecto a la cancelacion de su factura,
+                      <br> ${ctx['folio_fiscal']}. la cual esta en proceso de cancelacion,
+                      <br> misma que fue realizada con la fecha: ${ctx['fecha_venta']}.
+
+                      <br>¡Excelente día!.
+                      <br><p><strong>LaFox</strong></p>
+                  </p>
+
+                ]]>
+            </field>
+      </record>
+
+    </data>
+</openerp>

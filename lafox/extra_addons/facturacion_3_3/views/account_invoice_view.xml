@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+            <!-- VISTA PARA RECIBOS ELECTRONICOS -->
+
+        <record model="ir.ui.view" id="view_recibos_electronicos_form">
+            <field name="name">Recibos Electronicos</field>
+            <field name="model">lafox.recibo.electronico.pago</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+              <form string="Recibo Electronico" create='0'>
+                <group col ='2' colspan = '4'>
+                  <field name="cfdi" /> 
+                  <field name="xml_recibo" readonly='True'/>
+                  <field name="acuse_recibo"/>
+                  <!-- <field name="show" />   -->
+                  <field name="fecha" />  
+                  <!-- <field name="folio_cfdi"  />  -->
+                  <field name="forma_pago"/>  
+                  <field name="invoice_id" />  
+                </group>
+                
+              </form>
+            </field>
+           </record>
+
+           <record model="ir.ui.view" id="view_recibos_electronicos_kanban">
+            <field name="name">view.recibos.electronicos.kanban</field>
+            <field name="model">lafox.recibo.electronico.pago</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_color_#{kanban_getcolor(0)} oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_dropdown_toggle oe_dropdown_kanban">
+                                    <span class="oe_e">í</span>
+                                    <ul class="oe_dropdown_menu">
+                                        <t t-if="widget.view.is_action_enabled('edit')"><li><a type="edit">Editar...</a></li></t>
+                                        <t t-if="widget.view.is_action_enabled('delete')"><li><a type="delete">Borrar...</a></li></t>
+                                        <li><a name="95" type="action">Revisar Email</a></li>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div>
+                                        <b><field name="fecha"/></b>
+                                        <p style="color:blue"><field name="xml_recibo"/></p>
+                                        <p style="color:red"><field name="acuse_recibo"/></p>
+                                    </div>
+                                    <div>
+                                        <field name="forma_pago"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <img t-att-src="kanban_image('res.company', 'image_small', record.logo)" width="24" height="24" class="oe_kanban_avatar pull-right"/>
+                                        <div class="pull-left" groups="base.group_user">
+                                            <field name="fecha" widget="kanban_state_selection"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="oe_clear"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_recibos_electronicos_tree">
+            <field name="name">Recibos Electronicos</field>
+            <field name="model">lafox.recibo.electronico.pago</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+              <tree string="Pagos Realizados" create='0'>
+                    <field name="cfdi" />  
+                    <field name="xml_recibo" />  
+                    <field name="acuse_recibo" />  
+                    <field name="show" />  
+                    <!-- <field name="monto_pago" />   -->
+                    <field name="fecha" />
+                    <!-- <field name="cliente" /> -->
+                    <field name="folio_cfdi" />
+                    <field name="forma_pago" />
+                    <field name="invoice_id" />
+              </tree>
+            </field>
+           </record>
+
+      <!-- Action PARA RECIBOS ELECTRONICOS -->
+          <record id="action_recibos_electronicos" model="ir.actions.act_window">
+            <field name="name">Recibos Electronicos</field>
+            <field name="res_model">lafox.recibo.electronico.pago</field>  
+            <field name="type">ir.actions.act_window</field>  
+            <field name="view_type">form</field>  
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_recibos_electronicos_tree"/>  
+            <field name="domain">[('invoice_id','=',active_id)]</field>
+            <field name="context">{}</field>
+          </record>
+
+          <record model="ir.actions.act_window.view" id="action_recibos_electronicos_form">
+              <field eval="2" name="sequence"/>
+              <field name="view_mode">form</field>
+              <field name="view_id" ref="view_recibos_electronicos_form"/>
+              <field name="act_window_id" ref="action_recibos_electronicos"/>
+            </record>
+
+            <record model="ir.actions.act_window.view" id="action_recibos_electronicos_tree">
+              <field eval="1" name="sequence"/>
+              <field name="view_mode">tree</field>
+              <field name="view_id" ref="view_recibos_electronicos_tree"/>
+              <field name="act_window_id" ref="action_recibos_electronicos"/>
+            </record>
+            <record model="ir.actions.act_window.view" id="action_recibos_electronicos_kanban">
+              <field eval="3" name="sequence"/>
+              <field name="view_mode">kanban</field>
+              <field name="view_id" ref="view_recibos_electronicos_kanban"/>
+              <field name="act_window_id" ref="action_recibos_electronicos"/>
+            </record>
+
+    	<!-- Vistas para jemil.wizard.pagos.Electronicos (INICIO) -->
+        <record model="ir.ui.view" id="wizard_pagos_electronico_form">
+            <field name="name">Obtener Recibo Electronico de Pago</field>
+            <field name="model">lafox.recibo.electronico.pago</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Recibo Electronico">
+                <group col ='2' colspan = '4'>
+                  <field name="fecha" /> 
+                  <field name="forma_pago"/>
+                  <field name="monto_pago" readonly='False'/>
+                  <field name="cfdi" on_change="1" attrs="{'invisible': [('forma_pago', '=', False)]}"/>  
+                  <field name="show" invisible='True'/>  
+                  <field name="cliente"  attrs="{'invisible': [('show', '=', False)]}"/> 
+                  <field name="folio_cfdi" readonly='True' attrs="{'invisible': [('show', '=', False)]}"/>  
+                  <!-- <field name="monto_pago"  attrs="{'invisible': [('show', '=', False)]}"/>  -->
+                  <field name="xml_recibo" attrs="{'invisible': [('show', '=', False)]}"/>  
+                  <field name="acuse_recibo" invisible='True'/>  
+                </group>
+                <footer>
+                  <button name="button_recibo_electronico_pago" string="Mandar Recibo Electronico de Pago" type="object" class="oe_highlight"/>
+                </footer>
+              </form>
+            </field>
+           </record>
+
+        <record id="action_wizard_pagos_electronico" model="ir.actions.act_window">
+          <field name="name">Recibo Electronico de Pago</field>
+          <field name="res_model">lafox.recibo.electronico.pago</field>  
+          <field name="type">ir.actions.act_window</field>  
+          <field name="view_type">form</field>  
+          <field name="view_mode">form</field>
+          <field name="view_id" ref="wizard_pagos_electronico_form"/>  
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+          <field name="target">new</field>
+        </record>
+
+    	<record id="view_invoice_form_inherit" model="ir.ui.view">
+            <field name="name">account_image_product.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//field[@name='partner_id']" position="after">
+            		<field name = "tipo_venta" required='True'  on_change="1"/>
+            	</xpath>
+            	<xpath expr="//h1" position="after">
+                        <button name='%(action_recibos_electronicos)d' string='Recibo Electronico' class="oe_stat_button" icon='fa-folder-o' type="action"/>
+                    </xpath> 
+              <xpath expr="/form/sheet/notebook" position="before">
+                    <separator colspan="4" string="Facturación" attrs="{'invisible': [('tipo_venta', '!=', 'FACTURA')]}" />
+                      	<group col="4" colspan="2" attrs="{'invisible': [('tipo_venta', '!=', 'FACTURA')]}">
+	                        <field name='lugar_exp'/>
+	                        <field name='tipo_comprobante'/>
+                            <field name='folio_fiscal'/>
+                            <field name='serie'/>
+                            <field name='folio' readonly = 'False'/>
+                            <field name='no_serie_csd_sat'/>
+                            <field name='no_serie_csd_emisor'/>
+                            <field name='RfcProvCertif'/>
+                            <field name='metodo_pago'/>
+                            <field name='forma_pago'/>
+                            <field name='regimen_fiscal'/>
+                            <field name='uso_cfdi'/>
+                            <field name='factura_estatus' string='Estatus de la facturacion'/>
+                            <field name='n_seguimiento' string='N de seguimieto factura' />
+                            <field name= 'estado_soli' string='Estado de la factura' />
+
+                            <!-- <field name='uuid_relacionado' string='Facturas relacionadas' readonly='True' attrs="{'invisible': [('state_ac', '==', 'draft'), ('state_ac', '==', 'cancel')]}" /> -->
+
+                            <field name='total_con_letra' invisible="True"/>
+                            <field name='sello_digita_emisor' invisible="True"/>
+                            <field name='sello_digita_sat' invisible="True"/>
+                            <field name='name_facturacion' invisible ='True'/>
+                            <field name='pass_facturacion' invisible ='True'/>
+                            <field name='fecha_certificacion' invisible='True'/>
+                            <field name='fecha_emision' invisible='True'/>
+                        </group>
+                         <group attrs="{'invisible': [('tipo_venta', '!=', 'FACTURA')]}">
+                            <field name='cadena_original_s' invisible="True"/>
+                            <field name='bind' invisible="True"/>
+                            <field name='xml_64' readonly='True' attrs="{'invisible': [('bind', '==', False)]}"/>
+                            <!-- <field name='xml_64' readonly='False' attrs="{'invisible': [('bind', '!=', False)]}"/> -->
+                            <field name='qr' invisible='True'/>
+                        </group>
+                    </xpath>
+                    <xpath expr="//header/button[@name='invoice_cancel']" position="after">
+                        <button name='bind_buttom' string='Timbrar' type="object" attrs="{'invisible': ['|',('bind', '==', True),('state_ac', '==', 'cancel')]}" class="oe_highlight"/>  
+                        <button name='enviar_factura' string='Enviar Factura' type="object" attrs="{'invisible': ['|','|',('state_ac', '==', 'cancel'),('state_ac', '==', 'open'),('state_ac', '==', 'paid')]}"/>  
+
+                        <button name='button_estatus' string='Estatus factura' type="object" attrs="{'invisible': ['|','|',('bind', '!=', True),('state_ac', '==', 'cancel')]}" class="oe_highlight" />
+
+                        <button name="button_cancel_factura" string="Cancelar Factura" type="object" class="oe_highlight" confirm="¿Está seguro que desea cancelar la Factura?" attrs="{'invisible': ['|',('state_ac', '==', 'draft'), ('state_ac', '==', 'cancel')]}" />
+
+                        <button name="button_consul_estatus" string="Estatus solicitud de cancelacion" type="object" attrs="{'invisible': ['|','|',('state_ac', '==', 'draft'), ('state_ac', '==', 'cancel')]}" class="oe_highlight" />
+
+                        <!-- <button name="button_cancel_f_ppd" string="Estatus factura2" type="object" attrs="{'invisible': ['|','|',('forma_pago', '==', 'PUE')]}" /> -->
+
+                        <button name='%(action_wizard_pagos_electronico)d' string='Recibo Electronico' type="action" attrs="{'invisible': ['|','|',('bind', '!=', True),('forma_pago', '!=', 'PPD'),('state_ac', '==', 'paid')]}"/>
+
+                        <field name='state_ac' widget="statusbar" clickable="True" statusbar_visible="paid,open,draft,cancel" readonly="True"/> 
+                    </xpath> 
+                    <xpath expr="//field[@name='state']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                     <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='name']" position="before">
+                            <field name='clave_prod_serv' required='True'/>
+                    </xpath>
+                     <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line']/tree/field[@name='price_unit']" position="before">
+                            <field name='clave_unidad' required='True'/>
+                    </xpath>
+                    <xpath expr="//field[@name='comment']" position="replace">
+                        <group>
+                            <field name='comentarios'/> 
+                        </group>
+                    </xpath>
+                    <xpath expr="//field[@name='residual']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='amount_total']" position="after">
+                      <field name='monto_pagado' invisible='True'/>
+                      <field name='saldo_pediente' readonly='True' widget='monetary' options="{'currency_field': 'currency_id'}" />
+                    </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
+
+
+
+
+<!-- Este es un comentario sin funcion  -->

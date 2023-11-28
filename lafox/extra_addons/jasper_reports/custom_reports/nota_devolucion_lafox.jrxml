@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nota_devolucion_laFox" language="groovy" pageWidth="416" pageHeight="569" columnWidth="406" leftMargin="10" rightMargin="0" topMargin="9" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true">
+	<property name="ireport.zoom" value="1.6528925619834907"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/misael/Descargas/custom_reports/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="account_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{account_id}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="IDS" class="java.lang.Object"/>
+	<parameter name="PIDS" class="java.util.List">
+		<defaultValueExpression><![CDATA[$P{IDS}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	lafox_devolucion_productos.venta_pro,
+	RP.name,
+	RP.street ||' '|| RP.street2 as direccion,
+	RP.city || ' ' || RP.name || ' ' || RP.zip as ciudad,
+	RP.phone || ' ' || RP.mobile || ' ' || RP.fax as phones,
+	res_country.name as pais,
+	total_movimientos,
+	RP.clave_cliente,
+	RP.moneda_valores,
+	RP.dias_credito,
+	RP.escala_precios,
+	lafox_devolucion_productos.product_id,
+	lafox_devolucion_productos.description,
+
+	lafox_devolucion_productos.product_uom_qty,
+	lafox_devolucion_productos.piezas_qty,
+	lafox_devolucion_productos.precio_mov,
+	lafox_devolucion_productos.precio_lst,
+	lafox_devolucion_productos.amount,
+	pr.name_template as producto,
+	pr.clave_prod as descripcion,
+	pr.c_t as tipo_producto,
+	pr.unidad_product as unidad,
+	total_movimientos as total_devolucion,
+	hr_employee.name_related as agente,
+	lafox_devolucion_credito.id as sum_id
+
+
+FROM lafox_devolucion_credito
+
+
+INNER JOIN lafox_devolucion_productos ON lafox_devolucion_credito.id = lafox_devolucion_productos.account_id
+
+INNER JOIN res_partner as RP ON lafox_devolucion_credito.cliente = RP.id
+INNER JOIN product_template as PT ON lafox_devolucion_productos.product_id = PT.id
+INNER JOIN product_product as PR ON lafox_devolucion_productos.product_id = PR.id
+INNER JOIN res_country ON RP.country_id = res_country.id
+INNER JOIN res_country_state as RS ON RP.state_id = RS.id
+INNER JOIN res_users ON lafox_devolucion_credito.create_uid = res_users.id
+INNER JOIN hr_employee on res_users.login = hr_employee.work_email
+
+
+WHERE $X{IN,lafox_devolucion_credito.id,PIDS}]]>
+	</queryString>
+	<field name="venta_pro" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<field name="phones" class="java.lang.String"/>
+	<field name="pais" class="java.lang.String"/>
+	<field name="total_movimientos" class="java.lang.Double"/>
+	<field name="clave_cliente" class="java.lang.String"/>
+	<field name="moneda_valores" class="java.lang.String"/>
+	<field name="dias_credito" class="java.lang.String"/>
+	<field name="escala_precios" class="java.lang.Integer"/>
+	<field name="product_id" class="java.lang.Integer"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="product_uom_qty" class="java.lang.Double"/>
+	<field name="piezas_qty" class="java.lang.Double"/>
+	<field name="precio_mov" class="java.lang.Double"/>
+	<field name="precio_lst" class="java.lang.Double"/>
+	<field name="amount" class="java.lang.Float"/>
+	<field name="producto" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="tipo_producto" class="java.lang.String"/>
+	<field name="unidad" class="java.lang.String"/>
+	<field name="total_devolucion" class="java.lang.Float"/>
+	<field name="agente" class="java.lang.String"/>
+	<field name="sum_id" class="java.lang.Integer"/>
+	<title>
+		<band height="4" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="92">
+			<image hAlign="Left" vAlign="Bottom">
+				<reportElement positionType="FixRelativeToBottom" x="-8" y="-11" width="129" height="85"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="124" y="18" width="138" height="13"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Deleg. Cuauhtemoc, Ciudad de Mexico]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="227" y="54" width="169" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ciudad}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="124" y="35" width="272" height="1" forecolor="#737373"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="216" y="63" width="180" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{phones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="124" y="11" width="111" height="13"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Palma 31 4o Piso, Col Centro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="14" width="16" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Hoja:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="364" y="14" width="30" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="45" width="206" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="124" y="26" width="120" height="9"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(55) 5512-7614, 5518-2628]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="36" width="52" height="10"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{clave_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="36" width="206" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="1" y="74" width="395" height="17" forecolor="#FDC193" backcolor="#FDC193"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="163" y="74" width="81" height="9"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[D E V O L U C I O N]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="81" width="30" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="81" width="57" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="81" width="37" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="81" width="43" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prec. Lista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="81" width="28" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="81" width="38" height="9"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="61" width="62" height="10"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_producto}=="0" ? "(ACCESORIOS)":$F{tipo_producto}=="1"?"(TERMINADO)": null]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="26" width="31" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Agente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="346" y="26" width="51" height="9"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{agente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="217" y="0" width="63" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{precio_mov}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="282" y="0" width="53" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{precio_lst}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="0" width="17" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="0" width="126" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="334" y="0" width="61" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amount} * -1]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="1" width="37" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="0" width="15" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{unidad}=="HILO"?"HL": $F{unidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="179" y="0" width="28" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{piezas_qty}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="44">
+			<image>
+				<reportElement x="17" y="1" width="25" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["Nuevo-logo-Facebook.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="17" y="20" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="139" y="18" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="262" y="18" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="142" y="1" width="28" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo-www-png-7.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="309" y="1" width="25" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["insta.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="37" y="8" width="51" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LaFoxJoyeria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="8" width="69" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[www.lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="8" width="64" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[@lafoxjoyeria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="29" width="81" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventas@lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="29" width="118" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventasterminado@lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="29" width="118" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[accesoriosventas@lafox.com.mx]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="67">
+			<staticText>
+				<reportElement x="0" y="2" width="356" height="15"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*LE RECORDAMOS QUE PARA DEVOLUCIONES DE MERCANCIA EN PRODUCTO TERMINADO, SE RECIBIRA HASTA EL 30% SOBRE SU COMPRA, EN ACCESORIOS NO HAY DEVOLUCIONES]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="42" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="255" y="40" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="132" y="40" width="25" height="24"/>
+				<imageExpression class="java.lang.String"><![CDATA["mail.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="302" y="23" width="25" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["insta.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="135" y="23" width="28" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["logo-www-png-7.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="30" y="30" width="51" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LaFoxJoyeria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="51" width="118" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[accesoriosventas@lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="30" width="69" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[www.lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="51" width="118" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventasterminado@lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="51" width="81" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ventas@lafox.com.mx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="30" width="64" height="7"/>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[@lafoxjoyeria]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="23" width="25" height="17"/>
+				<imageExpression class="java.lang.String"><![CDATA["Nuevo-logo-Facebook.png"]]></imageExpression>
+			</image>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="50">
+			<line>
+				<reportElement x="0" y="2" width="396" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="344" y="5" width="52" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_devolucion} * -1]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="141" y="8" width="203" height="14"/>
+				<subreportParameter name="suma_id">
+					<subreportParameterExpression><![CDATA[$F{sum_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreporte_sum_nota_dev.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="4" y="7" width="54" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Devolución]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

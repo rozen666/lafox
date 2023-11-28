@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice_line" language="groovy" pageWidth="396" pageHeight="85" columnWidth="376" leftMargin="10" rightMargin="10" topMargin="0" bottomMargin="15" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.996500000000014"/>
+	<property name="ireport.x" value="5"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.util.JRImageLoader"/>
+	<parameter name="account_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{account_id}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+      account_invoice_line.name,
+      account_invoice_line.quantity,
+      account_invoice_line.price_unit,
+      account_invoice_line.price_subtotal,
+      product_product.clave_prod,
+      product_product.c_t,
+      account_invoice_line.price_unit_des,
+      product_product.unidad_product,
+      lafox_grupo_de_precios.nomenclatura,
+      account_invoice_line.cantidad_producto
+
+
+FROM account_invoice_line
+INNER JOIN product_product ON account_invoice_line.product_id = product_product.id
+INNER JOIN product_template ON account_invoice_line.product_id = product_template.id
+INNER JOIN lafox_grupo_de_precios ON product_product.grupo_precios_id = lafox_grupo_de_precios.id
+
+WHERE account_invoice_line.invoice_id = $P{account_id}
+
+ORDER BY account_invoice_line.id]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="quantity" class="java.math.BigDecimal"/>
+	<field name="price_unit" class="java.math.BigDecimal"/>
+	<field name="price_subtotal" class="java.math.BigDecimal"/>
+	<field name="clave_prod" class="java.lang.String"/>
+	<field name="c_t" class="java.lang.String"/>
+	<field name="price_unit_des" class="java.math.BigDecimal"/>
+	<field name="unidad_product" class="java.lang.String"/>
+	<field name="nomenclatura" class="java.lang.String"/>
+	<field name="cantidad_producto" class="java.lang.Double"/>
+	<variable name="price_subtotal_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{price_subtotal}]]></variableExpression>
+	</variable>
+	<variable name="price_unit_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{price_unit}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="16">
+			<rectangle>
+				<reportElement x="0" y="0" width="366" height="16" forecolor="#FEAD70" backcolor="#FEAD70"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="215" y="7" width="40" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Prec. Lista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="7" width="44" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="7" width="34" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="356" height="7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="7" width="30" height="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="7" width="31" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Clave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="7" width="25" height="9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="297" y="0" width="65" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{price_subtotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="21" y="0" width="33" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="160" y="0" width="30" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[($F{quantity}!="0"?$F{quantity}:$F{cantidad_producto})]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="265" y="0" width="51" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{price_unit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="74" y="0" width="99" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{clave_prod}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="1" width="22" height="9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{unidad_product}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="248" y="0" width="19" height="11"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomenclatura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="3" width="74" height="7"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="211" y="1" width="44" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{price_unit_des}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="15">
+			<line>
+				<reportElement x="0" y="0" width="376" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="296" y="2" width="67" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{price_subtotal_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="2" width="72" height="9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Venta]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

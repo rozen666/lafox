@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+    	<record id="view_company_form_inherit" model="ir.ui.view">
+            <field name="name">Company</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!-- <xpath expr="//form" position="attributes">
+                        <attribute name="create">False</attribute>
+                        <attribute name="delete">False</attribute>                        
+                    </xpath> -->
+                    <xpath expr="//notebook/page[2]" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//notebook/page[3]" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//group[@string='Bank Accounts']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='partner_id']" position="after">
+                        <field name='rfc' />
+                        <field name='fiscal_name' />
+                    </xpath>
+                    <xpath expr="//group[@string='Bank Accounts']" position="before">
+                        <group>
+	                        <field name='logo_emisor' invisible='False'/>
+	                        <field name='usr_proveedor' />
+	                        <field name='psw_proveedor' password='1'/>
+	                        <field name='cer' />
+	                        <field name='key' />
+	                        <field name='jpassword' password='1'/>
+	                    </group>
+               		</xpath> 
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>

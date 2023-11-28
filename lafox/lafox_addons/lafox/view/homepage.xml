@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data noupdate = "0" >
+		<template id="website.theme" name="Theme">
+		    <link id="bootstrap_css" rel='stylesheet' href='/web/static/lib/bootstrap/css/bootstrap.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/website/static/src/css/website.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/web/static/lib/fontawesome/css/font-awesome.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/website/static/src/css/bootswatch/cerulean.min.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/website/static/src/css/bootswatch/cerulean.min.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/website/static/src/css/website.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/website_mail/static/src/css/website_mail.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/survey/static/src/css/survey_print.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/web_graph/static/src/css/nv.d3.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/survey/static/src/css/survey_result.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/website/static/src/css/snippets.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/website/static/src/css/editor.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/web/static/lib/jquery.ui/css/smoothness/jquery-ui-1.9.1.custom.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/web/static/lib/select2/select2.css' t-ignore="true"/>
+		    <link rel="stylesheet" href='/website/static/lib/select2-bootstrap-css/select2-bootstrap.css' t-ignore="true"/>
+		</template>
+
+		<template id="lafox_footer" inherit_id="website.footer_custom" name="lafox Footer">
+		    <xpath expr="//div[@id='footer']" position="replace">
+		    	<div class="oe_structure" id="footer">
+			        <div class="container hidden-print">
+			            <div class="row">
+			                <div class="col-md-3">
+			                    <h4>La Fox</h4>
+			                    <ul class="list-unstyled" id="info">
+			                    	<li>Calidad en oro laminado.</li>
+			                    </ul>
+													<ul class="list-unstyled" id="info">
+			                    	<li>Desde el año 1984</li>
+			                    </ul>
+			                </div>
+			                <div class="col-md-3" id="info">
+			                    <h4>Conéctate con nosotros </h4>
+			                    <ul class="list-unstyled">
+			                        <li><a href="/page/website.contactus">Contáctanos</a></li>
+			                    </ul>
+			                    <ul class="list-unstyled">
+			                        <li t-ignore="true"><i class="fa fa-phone"></i> <span t-field="res_company.phone"></span></li>
+			                        <li t-ignore="true"><i class="fa fa-envelope"></i>  <span t-field="res_company.email"></span></li>
+			                    <!-- </ul>
+			                    <h2>
+			                        <a t-att-href="website.social_facebook" t-if="website.social_facebook"><i class="fa fa-facebook-square"/></a> -->
+			                        <li><a href="https://www.facebook.com/"><i class="fa fa-facebook-square"/> La Fox.</a></li>
+			                    </ul>
+			                </div>
+			                <div class="col-md-5 col-lg-offset-1">
+			                    <div>
+			                    	<h2>
+			                    		<small><a href="/page/website/home">LA FOX S.A. DE C.V.</a></small>
+			                    	</h2>
+			                        <h4>
+			                            <small> - <a href="/page/website.lafox_aboutus">Acerca de nosotros</a></small>
+			                        </h4>
+			                        <p>
+			                          Somos una empresa dedicada a darte las mejores prendas en oro laminado para que las portes
+																en tus eventos o diarimente como tu prefieras lucir estas piezas, le ponemos estilo a cada
+																uno de los detalles de la pieza porque nos gusta entregar productos de alta calidad que puedas
+																aprovechar al maximo su belleza.
+			                        </p>
+			                    </div>
+			                    <iframe src="https://www.facebook.com/plugins/like.php?href=https://www.facebook.com/JemilOficinas/?fref=ts&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=trebuchet+ms&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:440px; height:70px;" allowTransparency="true"></iframe>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+		    </xpath>
+		</template>
+
+		<template id="homepage" inherit_id="website.homepage" name="LAFOXHomepage">
+		  <xpath expr="//div[@id='wrap']" position="inside">
+		    <div id="wrap" class="oe_structure oe_empty">
+		      <div class="container carousel quotecarousel slide mt0 mb0" id="myCarousel_1480371417136" style="height: 510px; overflow: hidden;">
+		        <ol class="carousel-indicators mb0">
+		          <li class="active" data-slide-to="0" data-target="#myCarousel_1480371417136">
+		            <br/>
+		          </li>
+		          <li data-slide-to="1" data-target="#myCarousel_1480371417136">
+		            <br/>
+		          </li>
+		          <li data-slide-to="2" data-target="#myCarousel_1480371417136">
+		            <br/>
+		          </li>
+		          <li data-slide-to="3" data-target="#myCarousel_1480371417136">
+		            <br/>
+		          </li>
+		          <li data-slide-to="4" data-target="#myCarousel_1480371417136">
+		            <br/>
+		          </li>
+		        </ol>
+		        <div class="carousel-inner">
+		          <div class="item text_only oe_img_bg active">
+		            <img src = "http://127.0.0.1:8069/lafox/static/image/LOGOTIPO.jpg" alt="Chaina" style="width:75%;margin-left: auto;margin-right: auto" />
+		            <div class="carousel-caption">
+		            </div>
+		          </div>
+		          <div class="item text_only oe_img_bg" style="height: 152px; background-image: url(&quot;/lafox/static/image/mascara.jpg&quot;);width:65%; margin-left: auto;margin-right: auto">
+		            <div class="container">
+		              <div class="content">
+		                <div class="row">
+		                  <blockquote class="mt128 mb128 col-md-4 col-md-offset-4">
+		                    <p/>
+		                  </blockquote>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="item text_only oe_img_bg" style="background-image: url(&quot;/lafox/static/image/leon.jpg&quot;);width:65%; margin-left: auto;margin-right: auto">
+		            <div class="container">
+		              <div class="content">
+		                <div class="row">
+		                  <blockquote class="col-md-offset-7 mb0 mt128 col-md-1"/>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="item text_only oe_img_bg" style="background-image: url(&quot;/lafox/static/image/aretes.jpg&quot;);width:70%; margin-left: auto;margin-right: auto">
+		            <div class="container">
+		              <div class="content">
+		                <div class="row">
+		                  <blockquote class="mt128 mb128 col-md-4 col-md-offset-4">
+		                    <p/>
+		                  </blockquote>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="item text_only oe_img_bg" style="background-image: url(&quot;/lafox/static/image/ACCESORIOS.jpg&quot;);width:70%; margin-left: auto;margin-right: auto">
+		            <div class="container">
+		              <div class="content">
+		                <div class="row">
+		                  <blockquote class="mt128 mb128 col-md-4 col-md-offset-4">
+		                    <p/>
+		                  </blockquote>
+		                </div>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </xpath>
+		</template>
+
+		<template id="layout_footer_sin_copyright" inherit_id="website.layout" name="Footer sin Copyright">
+		    <xpath expr="//footer/div[2]" position="replace">
+		        <div class="container mt16 mb8">
+		            <div class="pull-left text-muted" itemscope="itemscope" itemtype="http://schema.org/Organization">
+		                Copyright &amp;copy; <span t-field="res_company.name" itemprop="name">Company name</span>
+		            </div>
+		        </div>
+
+		    </xpath>
+		</template>
+	</data>
+</openerp>
